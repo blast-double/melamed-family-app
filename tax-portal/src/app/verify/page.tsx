@@ -78,7 +78,7 @@ function CopyButton({ text }: { text: string }) {
       <Tooltip>
         <TooltipTrigger
           onClick={handleCopy}
-          className="p-1 rounded hover:bg-zinc-700/50 transition-colors cursor-pointer"
+          className="p-1 rounded hover:bg-zinc-700/50 transition-colors cursor-pointer no-print"
         >
           <span className="text-[10px] font-mono text-zinc-500 hover:text-zinc-300">
             {copied ? "\u2713" : "\u29C9"}
@@ -107,26 +107,26 @@ function FieldRow({
   if (isZero) return null;
 
   return (
-    <TableRow className="border-zinc-700/30 hover:bg-zinc-800/20">
-      <TableCell className="w-8">
+    <TableRow className="border-zinc-700/30 hover:bg-zinc-800/20 print:border-gray-200 print:hover:bg-transparent">
+      <TableCell className="w-8 no-print">
         <Checkbox checked={verified} onCheckedChange={onVerify} />
       </TableCell>
-      <TableCell className="text-xs text-zinc-300">{field.label}</TableCell>
+      <TableCell className="text-xs text-zinc-300 print:text-gray-800">{field.label}</TableCell>
       <TableCell className="text-right">
         <div className="flex items-center justify-end gap-2">
-          <span className="font-mono text-sm text-zinc-100">{isMonetaryField(field.label, field.value) ? `$${field.value}` : field.value}</span>
+          <span className="font-mono text-sm text-zinc-100 print:text-gray-900">{isMonetaryField(field.label, field.value) ? `$${field.value}` : field.value}</span>
           <CopyButton text={field.value} />
         </div>
       </TableCell>
       <TableCell className="w-28">
         <Badge
           variant="outline"
-          className={`text-[10px] font-mono ${colors.text} ${colors.bg} ${colors.border}`}
+          className={`text-[10px] font-mono ${colors.text} ${colors.bg} ${colors.border} print:bg-transparent print:text-gray-600 print:border-gray-400`}
         >
           {field.confidence}
         </Badge>
       </TableCell>
-      <TableCell className="text-[10px] font-mono text-zinc-400 max-w-[200px] truncate">
+      <TableCell className="text-[10px] font-mono text-zinc-400 max-w-[200px] truncate print:text-gray-500">
         {field.schedule_line || "\u2014"}
       </TableCell>
     </TableRow>
@@ -164,30 +164,30 @@ function DocumentCard({ doc }: { doc: ExtractedDocument }) {
   };
 
   return (
-    <Card className="bg-zinc-900/30 border-zinc-700 overflow-hidden">
-      <div className="px-4 py-3 flex items-center justify-between border-b border-zinc-700/50">
+    <Card className="bg-zinc-900/30 border-zinc-700 overflow-hidden print:bg-white print:border-gray-300 print:break-inside-avoid">
+      <div className="px-4 py-3 flex items-center justify-between border-b border-zinc-700/50 print:border-gray-200">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-zinc-200">
+            <span className="text-sm font-medium text-zinc-200 print:text-gray-900">
               {doc.institution}
             </span>
-            <Badge variant="outline" className="text-[10px] font-mono text-zinc-500 border-zinc-700">
+            <Badge variant="outline" className="text-[10px] font-mono text-zinc-500 border-zinc-700 print:text-gray-600 print:border-gray-400">
               {doc.form_type}
             </Badge>
             <Badge
               variant="outline"
-              className={`text-[10px] font-mono ${statusColors[doc.status] || statusColors.expected}`}
+              className={`text-[10px] font-mono ${statusColors[doc.status] || statusColors.expected} print:bg-transparent print:text-gray-600 print:border-gray-400`}
             >
               {doc.status}
             </Badge>
           </div>
           {doc.file_path && (
-            <div className="text-[10px] font-mono text-zinc-400 mt-0.5">
+            <div className="text-[10px] font-mono text-zinc-400 mt-0.5 print:text-gray-500">
               {doc.file_path}
             </div>
           )}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 no-print">
           {doc.file_path && <DocumentDrawer doc={doc} />}
           {nonZeroFields.length > 0 && (
             allVerified ? (
@@ -211,18 +211,18 @@ function DocumentCard({ doc }: { doc: ExtractedDocument }) {
       {doc.fields.length > 0 ? (
         <Table>
           <TableHeader>
-            <TableRow className="border-zinc-700/30 hover:bg-transparent">
-              <TableHead className="w-8" />
-              <TableHead className="text-[10px] font-mono text-zinc-400">
+            <TableRow className="border-zinc-700/30 hover:bg-transparent print:border-gray-200">
+              <TableHead className="w-8 no-print" />
+              <TableHead className="text-[10px] font-mono text-zinc-400 print:text-gray-500">
                 Field
               </TableHead>
-              <TableHead className="text-[10px] font-mono text-zinc-400 text-right">
+              <TableHead className="text-[10px] font-mono text-zinc-400 text-right print:text-gray-500">
                 Value
               </TableHead>
-              <TableHead className="text-[10px] font-mono text-zinc-400 w-28">
+              <TableHead className="text-[10px] font-mono text-zinc-400 w-28 print:text-gray-500">
                 Confidence
               </TableHead>
-              <TableHead className="text-[10px] font-mono text-zinc-400">
+              <TableHead className="text-[10px] font-mono text-zinc-400 print:text-gray-500">
                 Schedule Line
               </TableHead>
             </TableRow>
@@ -239,7 +239,7 @@ function DocumentCard({ doc }: { doc: ExtractedDocument }) {
           </TableBody>
         </Table>
       ) : (
-        <div className="px-4 py-3 text-[11px] font-mono text-zinc-600">
+        <div className="px-4 py-3 text-[11px] font-mono text-zinc-600 print:text-gray-500">
           No extracted fields yet — run PDF extraction to populate
         </div>
       )}
@@ -262,71 +262,71 @@ function MonarchSummaryCard({
   if (!data) return null;
 
   return (
-    <Card className="bg-zinc-900/30 border-zinc-700 overflow-hidden">
-      <div className="px-4 py-3 border-b border-zinc-700/50">
+    <Card className="bg-zinc-900/30 border-zinc-700 overflow-hidden print:bg-white print:border-gray-300 print:break-inside-avoid">
+      <div className="px-4 py-3 border-b border-zinc-700/50 print:border-gray-200">
         <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-zinc-200">
+          <span className="text-sm font-medium text-zinc-200 print:text-gray-900">
             Monarch Money Transactions
           </span>
-          <Badge variant="outline" className="text-[10px] font-mono text-zinc-500 border-zinc-700">
+          <Badge variant="outline" className="text-[10px] font-mono text-zinc-500 border-zinc-700 no-print">
             Live
           </Badge>
         </div>
       </div>
       <Table>
         <TableHeader>
-          <TableRow className="border-zinc-700/30 hover:bg-transparent">
-            <TableHead className="text-[10px] font-mono text-zinc-400">
+          <TableRow className="border-zinc-700/30 hover:bg-transparent print:border-gray-200">
+            <TableHead className="text-[10px] font-mono text-zinc-400 print:text-gray-500">
               Category
             </TableHead>
-            <TableHead className="text-[10px] font-mono text-zinc-400 text-center">
+            <TableHead className="text-[10px] font-mono text-zinc-400 text-center print:text-gray-500">
               Count
             </TableHead>
-            <TableHead className="text-[10px] font-mono text-zinc-400 text-right">
+            <TableHead className="text-[10px] font-mono text-zinc-400 text-right print:text-gray-500">
               Total
             </TableHead>
-            <TableHead className="w-8" />
+            <TableHead className="w-8 no-print" />
           </TableRow>
         </TableHeader>
         <TableBody>
           {data.categories.map((cat) => (
             <TableRow
               key={cat.category}
-              className="border-zinc-700/30 hover:bg-zinc-800/20"
+              className="border-zinc-700/30 hover:bg-zinc-800/20 print:border-gray-200"
             >
-              <TableCell className="text-xs text-zinc-300">
+              <TableCell className="text-xs text-zinc-300 print:text-gray-800">
                 {cat.category}
               </TableCell>
-              <TableCell className="text-xs font-mono text-zinc-500 text-center">
+              <TableCell className="text-xs font-mono text-zinc-500 text-center print:text-gray-600">
                 {cat.transaction_count}
               </TableCell>
               <TableCell className="text-right">
                 <span
                   className={`font-mono text-sm ${
-                    cat.total < 0 ? "text-red-400" : "text-emerald-400"
+                    cat.total < 0 ? "text-red-400 print:text-red-700" : "text-emerald-400 print:text-emerald-700"
                   }`}
                 >
                   {fmt(cat.total)}
                 </span>
               </TableCell>
-              <TableCell>
+              <TableCell className="no-print">
                 <CopyButton text={cat.total.toFixed(2)} />
               </TableCell>
             </TableRow>
           ))}
-          <TableRow className="border-zinc-700/30 hover:bg-transparent font-medium">
-            <TableCell className="text-xs text-zinc-200">Total</TableCell>
+          <TableRow className="border-zinc-700/30 hover:bg-transparent font-medium print:border-gray-300 print:border-t-2">
+            <TableCell className="text-xs text-zinc-200 print:text-gray-900 print:font-bold">Total</TableCell>
             <TableCell />
             <TableCell className="text-right">
               <span
                 className={`font-mono text-sm ${
-                  data.total < 0 ? "text-red-400" : "text-emerald-400"
+                  data.total < 0 ? "text-red-400 print:text-red-700" : "text-emerald-400 print:text-emerald-700"
                 }`}
               >
                 {fmt(data.total)}
               </span>
             </TableCell>
-            <TableCell>
+            <TableCell className="no-print">
               <CopyButton text={data.total.toFixed(2)} />
             </TableCell>
           </TableRow>
@@ -500,8 +500,19 @@ export default function VerifyPage() {
 
   return (
     <div className="flex-1 flex flex-col">
+      {/* Print header — hidden on screen */}
+      <div className="hidden print-only print:block print:px-0 print:py-4 print:border-b-2 print:border-gray-900 print:mb-6">
+        <h1 className="text-xl font-bold print:text-gray-900">
+          Tax Year {TAX_YEAR} — Document Verification Summary
+        </h1>
+        <p className="text-sm print:text-gray-500 mt-1">
+          Prepared {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+          {" "}&middot; Melamed Tax Portal
+        </p>
+      </div>
+
       {/* Header */}
-      <header className="border-b border-zinc-700 bg-zinc-950/80 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b border-zinc-700 bg-zinc-950/80 backdrop-blur-sm sticky top-0 z-50 no-print">
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link
@@ -522,7 +533,12 @@ export default function VerifyPage() {
                 Loading Monarch...
               </Badge>
             )}
-            <Button size="sm" variant="outline" className="text-xs border-zinc-700">
+            <Button
+              size="sm"
+              variant="outline"
+              className="text-xs border-zinc-700"
+              onClick={() => window.print()}
+            >
               Export Summary
             </Button>
           </div>
@@ -530,15 +546,15 @@ export default function VerifyPage() {
       </header>
 
       {/* Content */}
-      <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-6 space-y-8">
+      <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-6 space-y-8 print:px-0 print:py-0 print:space-y-6 print:max-w-none">
         {loading && (
-          <div className="flex items-center justify-center py-20">
+          <div className="flex items-center justify-center py-20 no-print">
             <div className="text-sm text-zinc-400">Loading documents...</div>
           </div>
         )}
 
         {error && (
-          <div className="flex items-center justify-center py-20">
+          <div className="flex items-center justify-center py-20 no-print">
             <div className="text-center">
               <div className="text-sm text-red-400 mb-2">Failed to load</div>
               <div className="text-[10px] font-mono text-zinc-400">{error}</div>
@@ -547,7 +563,7 @@ export default function VerifyPage() {
         )}
 
         {!loading && !error && schedules.length === 0 && (
-          <div className="flex items-center justify-center py-20">
+          <div className="flex items-center justify-center py-20 no-print">
             <div className="text-center">
               <div className="text-sm text-zinc-400 mb-2">No documents found</div>
               <div className="text-[10px] font-mono text-zinc-400">
@@ -557,13 +573,13 @@ export default function VerifyPage() {
           </div>
         )}
 
-        {schedules.map((group) => (
-          <section key={group.schedule}>
+        {schedules.map((group, idx) => (
+          <section key={group.schedule} className={idx > 0 ? "print-page-break" : ""}>
             <div className="flex items-center gap-3 mb-4">
-              <h2 className="text-lg font-light text-zinc-200">
+              <h2 className="text-lg font-light text-zinc-200 print:text-gray-900 print:font-semibold">
                 {group.display}
               </h2>
-              <div className="flex-1 h-px bg-zinc-800" />
+              <div className="flex-1 h-px bg-zinc-800 print:bg-gray-300" />
             </div>
 
             <div className="space-y-3">
@@ -574,7 +590,7 @@ export default function VerifyPage() {
               {group.monarch_data && (
                 <>
                   {group.documents.length > 0 && (
-                    <Separator className="bg-zinc-800/50" />
+                    <Separator className="bg-zinc-800/50 print:bg-gray-200" />
                   )}
                   <MonarchSummaryCard data={group.monarch_data} />
                 </>
