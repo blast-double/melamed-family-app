@@ -1,6 +1,6 @@
 **WORKSPACE**: Aaron Melamed — Personal Operations
 
-*Last Edited: 2026-03-30*
+*Last Edited: 2026-03-30 11:40*
 
 > [!IMPORTANT]
 > **MODEL MANDATE**: Use **Claude Opus 4.6** for all orchestration tasks. Model ID: `claude-opus-4-6`.
@@ -97,6 +97,9 @@ Built skills are in `.claude/skills/<name>/SKILL.md`. Remaining skills are plann
 | `/prep-tax-package` | Tax | Scan tax archive, compare against master checklist, report gaps with schedule summary |
 | `/train-categories` | Tax | Iterative Monarch transaction categorization — batched review, dry-run safety, audit log |
 | `/hunt-deductions` | Tax | Learn deduction patterns from verified months, hunt for missed deductions in unverified months |
+| `/ingest-tax-docs` | Tax | Auto-identify and rename tax PDFs via pattern matching + OCR fallback, dry-run with rollback |
+| `/extract-tax-forms` | Tax | Dual-pass OCR + Vision extraction from tax PDFs, reconciles field-by-field, stores in Supabase |
+| `/load-entity-data` | Tax | Load QBO business entity financial data (P&L, distributions, interest) into Supabase for /verify |
 | `/add-task` | Family | Add task to family Asana workspace from natural language |
 | `/review-pr` | Dev | Review pull requests for correctness, security, performance |
 | `/make-pr` | Dev | Create pull requests with structured summary |
@@ -211,7 +214,8 @@ Never mark a task complete without:
   - `infrastructure/` — Credentials, setup, infrastructure *(empty — planned)*
 - `execution/` — Internal tools: Python scripts & API clients
   - `finance/` — `categorize.py`, `monarch_client.py`, `hunt_deductions.py`, `modal_app.py`
-  - `tax/` — `rename_docs.py`, `match_files.py`, `identify_pdf.py`, `extract_pdf.py`, `seed_tax_year.py`, `asana_tasks.py`, `checklist.py`, `models.py`
+  - `tax/` — `rename_docs.py`, `match_files.py`, `identify_pdf.py`, `extract_pdf.py`, `seed_tax_year.py`, `load_qbo_to_supabase.py`, `asana_tasks.py`, `checklist.py`, `models.py`
+  - `keynote_tax_export.py` — Cross-workspace QBO export for Keynote Capital (reads from Keynote workspace)
   - `family/`, `property/`, `utils/`
 - `tax-portal/` — Next.js web app (deployed to Vercel). Routes: `/triage` (verification dashboard), `/verify` (Supabase-backed), `/api/monarch`, `/api/pdf`. GitHub: `blast-double/tax-portal`.
 - `config/` — YAML configs for code-ingestible data
