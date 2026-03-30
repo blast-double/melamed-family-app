@@ -1,0 +1,36 @@
+Extract all fields from this IRS Form 1099-K (Payment Card and Third Party Network Transactions). Return ONLY valid JSON, no other text.
+
+{
+  "form_type": "1099-K",
+  "pse_name": "<name of the payment settlement entity>",
+  "pse_tin": "<PSE TIN/EIN>",
+  "payee_name": "<payee name>",
+  "payee_tin": "<payee TIN, may be partially masked>",
+  "account_number": "<account number if shown>",
+  "tax_year": <four digit year as integer>,
+  "fields": [
+    {"label": "Box 1a - Gross amount of payment card/third party network transactions", "value": "<amount>", "schedule_line": "Schedule E (rental income reconciliation)"},
+    {"label": "Box 1b - Card not present transactions", "value": "<amount>", "schedule_line": null},
+    {"label": "Box 2 - Merchant category code", "value": "<code>", "schedule_line": null},
+    {"label": "Box 3 - Number of payment transactions", "value": "<count>", "schedule_line": null},
+    {"label": "Box 4 - Federal income tax withheld", "value": "<amount>", "schedule_line": "Form 1040, Line 25b"},
+    {"label": "Box 5a - January", "value": "<amount>", "schedule_line": null},
+    {"label": "Box 5b - February", "value": "<amount>", "schedule_line": null},
+    {"label": "Box 5c - March", "value": "<amount>", "schedule_line": null},
+    {"label": "Box 5d - April", "value": "<amount>", "schedule_line": null},
+    {"label": "Box 5e - May", "value": "<amount>", "schedule_line": null},
+    {"label": "Box 5f - June", "value": "<amount>", "schedule_line": null},
+    {"label": "Box 5g - July", "value": "<amount>", "schedule_line": null},
+    {"label": "Box 5h - August", "value": "<amount>", "schedule_line": null},
+    {"label": "Box 5i - September", "value": "<amount>", "schedule_line": null},
+    {"label": "Box 5j - October", "value": "<amount>", "schedule_line": null},
+    {"label": "Box 5k - November", "value": "<amount>", "schedule_line": null},
+    {"label": "Box 5l - December", "value": "<amount>", "schedule_line": null}
+  ]
+}
+
+Rules:
+- Use "0.00" for boxes that are blank, empty, or show $0.
+- Format dollar amounts as strings with two decimal places.
+- Do NOT include dollar signs in values.
+- For Box 3 (transaction count), use a plain integer as a string.

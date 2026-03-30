@@ -1,0 +1,365 @@
+# Last Updated: 2026-03-29 20:10
+#
+# Categorization rules for Monarch Money transactions.
+# Used by execution/finance/categorize.py during /train-categories skill.
+# Rules are applied in order — first match wins.
+# New rules are appended by the training loop as Aaron provides feedback.
+
+# --- Tax schedule mappings (category name → schedule) ---
+# These map Monarch categories to IRS tax schedules for the CPA summary.
+
+schedule_map:
+  # Schedule E — Rental property (1771 11th Ave)
+  schedule_e:
+    - "Rental Income"
+    - "Mortgage"
+    - "Property Tax"
+    - "1771 - Water"
+    - "1771 - Trash"
+    - "1771 - Maintenance "
+    - "1771 - Software"
+    - "1771 - Insurance"
+    - "1771 - Advertising"
+    - "1771 - Lawn & Garden"
+    - "1771 - Management"
+    - "1771 - Security Deposit"
+    - "1771 - Gas"
+    - "140 - Maintenance"
+    - "140 - Contractor"
+    - "140 - Furniture & Housewares"
+    - "140 - Design"
+
+  # Schedule C — Business expenses
+  schedule_c:
+    - "Office Supplies"
+    - "Cell Phone"
+    - "Dues & Subscriptions"
+    - "Software"
+    - "Business Utilities & Communication"
+    - "Business Services"
+    - "Business Income"
+    - "Postage & Shipping"
+    - "Advertising & Promotion"
+    - "Employee Wages & Contract Labor"
+    - "Office Rent"
+    - "Keynote - Software"
+    - "Keynote - Other"
+    - "Keynote - Real Estate"
+    - "Keynote - Professional Services"
+    - "Keynote - Taxes"
+    - "Itero - Software"
+    - "Itero - Professional Services"
+    - "Itero - Travel"
+    - "Itero - Restaurants"
+    - "Itero - Capital Contribution"
+    - "Itero - Tax & Registration"
+    - "Itero - Alan PMT"
+    - "Palisades Labs - Software"
+
+  # Self-employed deductions (Form 1040, Schedule 1)
+  self_employed_deduction:
+    - "Health Insurance"
+
+  # Credit card annual fees: AMEX reimbursements net to zero against actual fees.
+  # Not relevant for CPA — excluded from triage dashboard.
+  # schedule_c_credit_card_fees:
+  #   - "Credit Card Annual Fees"
+
+  # Business meals (50% deductible)
+  schedule_c_meals:
+    - "Business Travel & Meals"
+
+  # Schedule C — Home office
+  schedule_c_home_office:
+    - "Rent"
+    - "Internet & Cable"
+    - "Gas & Electric"
+
+  # Estimated tax payments (includes both payments AND refunds — they net out)
+  # The IRS refund in 2025 ($16,336.11) is correctly here; it offsets actual payments.
+  estimated_payments:
+    - "Federal Tax"
+
+  # Reference — CPA needs for reconciliation
+  # NOTE: "Airbnb Income" removed — the only Airbnb inflow in 2025 was a refund,
+  # not rental income. Rental income comes through ProPay only.
+  # NOTE: "Keynote Income" is here, NOT in Schedule C. Keynote is a passthrough LLC —
+  # distributions flow through the K-1. These Monarch transactions are just the bank
+  # deposits of those distributions. CPA reconciles against the K-1, not these.
+  reference:
+    - "Interest Income"
+    - "Other Income"
+    - "Keynote Income"
+
+  # Personal — excluded from tax package
+  personal:
+    - "Credit Card Annual Fees"
+    - "Reimbursed by Keynote"
+    - "Reimbursed by Itero"
+    - "Groceries"
+    - "Taxi & Ride Shares"
+    - "Shopping"
+    - "Clothing"
+    - "Entertainment & Recreation"
+    - "Streaming"
+    - "Music"
+    - "Coffee Shops"
+    - "Transfer"
+    - "Credit Card Payment"
+    - "Auto Payment"
+    - "Loan Repayment"
+    - "Buy Securities"
+    - "Paychecks"
+    - "Food Delivery"
+    - "Ice Cream"
+    - "Gas"
+    - "Public Transit"
+    - "Electronics"
+    - "Personal"
+    - "Personal Care"
+    - "Fitness"
+    - "Grappling"
+    - "Spa & Massage"
+    - "Hair"
+    - "Nails"
+    - "Pharmacy"
+    - "Medical"
+    - "Eyecare"
+    - "Pets"
+    - "Pet Other"
+    - "Pet Accessories"
+    - "Vetinary"
+    - "Pet Food"
+    - "Home Improvement"
+    - "Guns & Ammunition"
+    - "Sporting Goods"
+    - "Alcohol & Bars"
+    - "Scooters / Bikes"
+    - "Shoes"
+    - "Museums & Galleries"
+    - "Education"
+    - "Parking & Tolls"
+    - "iTunes"
+    - "Water"
+    - "Charity"
+    - "Airbnb Stay"
+    - "Restaurants"
+    - "Wedding"
+    - "Auto Maintenance"
+    - "Cash & ATM"
+    - "Dentist"
+    - "Gifts"
+    - "Furniture & Housewares"
+    - "Balance Adjustments"
+    - "Child Care"
+    - "Child Activities"
+    - "Student Loans"
+    - "Cooking Classes"
+    - "Employee Stock Options"
+    - "Crypto"
+    - "Garbage"
+    - "Phone"
+    - "Hotel"
+    - "Air Fare"
+    - "Car Rentals"
+    - "Travel Other"
+    - "Financial Fees"
+    - "Financial & Legal Services"
+
+# --- CPA notes ---
+# Inline notes displayed on the transaction verification dashboard.
+# Keyed by category name. Shown next to the category row for CPA context.
+
+cpa_notes:
+  "Keynote - Software": "Unreimbursed Keynote expense — Aaron deducts on Schedule C personally to avoid QB overhead."
+  "Rent": "Includes $150/mo Florida checks + Mexico City rent below."
+
+# --- Manual adjustments ---
+# Expenses not in Monarch that the CPA needs. Injected into JSON output.
+manual_adjustments:
+  schedule_c_home_office:
+    - name: "Rent — Mexico City (540k MXN)"
+      total: -31427.91
+      count: 6
+      note: "540,000 MXN paid via 6 FX wires from Schwab XXX117. Actual USD wire amounts used. See Schwab_XXX117_Honey_2025_Categorized.md for dates."
+    - name: "Internet — Mexico City (1,200 MXN/mo)"
+      total: -721.13
+      count: 12
+      note: "14,400 MXN converted at monthly Fed Reserve average rates. Avg effective rate: 19.97 MXN/USD."
+  "Business Travel & Meals": "50% deductible per IRC §274. All meals with clients/partners where business was discussed."
+  "Health Insurance": "Self-employed health insurance deduction (Cigna). Aaron pays personally, no employer coverage."
+  "Rental Income": "1771 11th Ave SF. ProPay deposits from tenants."
+  "Keynote Income": "Passthrough LLC distributions — reconcile against K-1, not these bank deposits. Do not double-count with K-1 income."
+  "Other Income": "Lending Club interest — CPA reconciles against 1099."
+
+# --- Plausibility checks (Signal 7) ---
+# Flag transactions where merchant doesn't match category.
+# These set needs_review=True — they do NOT auto-recategorize.
+
+plausibility:
+  # Known Mexico City home office utility merchants.
+  # Any "Gas & Electric" or "Internet & Cable" transaction NOT from these → flagged.
+  home_office_utility_merchants:
+    - "naturgymexi"
+    - "naturgy"
+    - "telmex"
+    - "izzi"
+    - "cfe"
+    - "totalplay"
+    - "pg&e"
+    - "bilt"
+    - "verizon"
+    - "godaddy"
+    - "ciudad de mexico"
+
+  # Generic payment platforms — these are payment rails, not merchants.
+  # When assigned to specific expense categories (maintenance, contractors), flag.
+  generic_payment_platforms:
+    - "zelle"
+    - "venmo"
+    - "paypal"
+    - "cash app"
+    - "square cash"
+    - "wise"
+
+  # POS terminal prefixes — the real merchant is after the * or space.
+  # When these appear as merchant names categorized as "Software", it's always wrong.
+  # SumUp, Square, Stripe are payment terminals, not software companies.
+  pos_terminal_prefixes:
+    - "sumup*"
+    - "sumup "
+    - "sq *"
+    - "square*"
+    - "stripe*"
+    - "billpocket*"
+    - "clip mx"
+    - "netpay*"
+    - "netpay "
+    - "bzpaymx*"
+    - "bzpaymx "
+    - "merpago*"
+    - "pointmp "
+
+  # Income/ambiguous categories where a payment platform as merchant is suspicious.
+  # Maintenance categories are excluded — Zelle payments to contractors are normal.
+  expense_categories_requiring_merchant:
+    - "Business Income"
+    - "Other Income"
+    - "Keynote Income"
+    - "Business Utilities & Communication"
+    - "Office Supplies"
+
+  # Foreign country codes at end of merchant name.
+  # Home office utilities should be Mexico only.
+  foreign_country_codes:
+    - "bra"
+    - "arg"
+    - "col"
+    - "per"
+    - "chl"
+    - "usa"
+    - "gbr"
+    - "fra"
+    - "ita"
+    - "esp"
+    - "deu"
+
+# --- Auto-categorization rules ---
+# These re-categorize transactions in Monarch based on patterns.
+# Applied during /train-categories. First match wins.
+
+rules:
+  # Batch 1 — Uncategorized (2025-03-29)
+  - match: { merchant_contains: "apple", account_contains: "Freedom Unlimited" }
+    set_category: "Software"
+    schedule: schedule_c
+    confidence: high
+    learned_from: "batch_1_2025-03-29"
+
+  - match: { merchant_contains: "fielmann" }
+    set_category: "Eyecare"
+    schedule: personal
+    confidence: high
+    learned_from: "batch_1_2025-03-29"
+
+  - match: { merchant_contains: "expressvpn" }
+    set_category: "Keynote - Software"
+    schedule: schedule_c
+    confidence: high
+    learned_from: "batch_1_2025-03-29"
+
+  - match: { merchant_contains: "magazzino" }
+    set_category: "Restaurants"
+    schedule: personal
+    confidence: high
+    learned_from: "batch_1_2025-03-29"
+
+  - match: { merchant_contains: "maizaj" }
+    set_category: "Restaurants"
+    schedule: personal
+    confidence: high
+    learned_from: "batch_1_2025-03-29"
+
+  - match: { merchant_contains: "senkaa" }
+    set_category: "Restaurants"
+    schedule: personal
+    confidence: high
+    learned_from: "batch_1_2025-03-29"
+
+  - match: { merchant_contains: "cherryhogg" }
+    set_category: "Pets"
+    schedule: personal
+    confidence: high
+    learned_from: "batch_1_2025-03-29"
+
+  # Batch 2-6 rules (2025-03-29)
+  - match: { merchant_contains: "soho ludlow" }
+    set_category: "Entertainment & Recreation"
+    schedule: personal
+    confidence: high
+    note: "Social club dues — nondeductible under TCJA. Meals there ARE deductible separately."
+    learned_from: "batch_fixes_2025-03-29"
+
+  - match: { merchant_contains: "izlah" }
+    set_category: "Restaurants"
+    schedule: personal
+    confidence: high
+    learned_from: "batch_5_2025-03-29"
+
+  - match: { merchant_contains: "goldman sachs", category_is: "Financial & Legal Services" }
+    set_category: "Transfer"
+    schedule: personal
+    confidence: high
+    note: "GS transfers to personal savings, not advisory fees"
+    learned_from: "batch_4_2025-03-29"
+
+  - match: { merchant_contains: "amex airline fee" }
+    set_category: "Credit Card Annual Fees"
+    schedule: schedule_c_credit_card_fees
+    confidence: high
+    note: "Offsets business card annual fee costs"
+    learned_from: "batch_fixes_2025-03-29"
+  # Aaron review corrections — 2026-03-29
+  # Positive inflows are NOT always income. Refunds, loans, and accidental
+  # payments need context (account type, merchant history) to classify correctly.
+
+  - match: { merchant_contains: "airbnb", amount_positive: true, account_contains: "Citi" }
+    set_category: "Airbnb Stay"
+    schedule: personal
+    confidence: high
+    note: "Airbnb on personal credit cards = refund/credit, not rental income. Rental income is ProPay only."
+    learned_from: "corrections_aaron_review_2026-03-29"
+
+  - match: { merchant_contains: "citibank", amount_positive: true }
+    set_category: "Transfer"
+    schedule: personal
+    confidence: medium
+    note: "Citibank inflows to personal accounts are transfers/loans, not income"
+    learned_from: "corrections_aaron_review_2026-03-29"
+
+  - match: { merchant_contains: "barra grana" }
+    set_category: "Restaurants"
+    schedule: personal
+    confidence: high
+    note: "Mexico City restaurant, not a business expense"
+    learned_from: "corrections_aaron_review_2026-03-29"

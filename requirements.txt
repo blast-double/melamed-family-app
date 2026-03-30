@@ -1,0 +1,13 @@
+# Last Edited: 2026-03-29
+# Family operations platform dependencies
+
+supabase==2.28.0
+psycopg2-binary==2.9.11
+pydantic==2.12.5
+pydantic-settings==2.13.1
+python-dotenv==1.2.2
+pytest==9.0.2
+requests>=2.31.0
+PyYAML>=6.0
+monarchmoney==0.1.15
+gql>=3.4,<4                 # monarchmoney 0.1.15 incompatible with gql 4.x

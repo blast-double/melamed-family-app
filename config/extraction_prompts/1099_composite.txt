@@ -1,0 +1,54 @@
+Extract all fields from this 1099 Composite and Year-End Summary. This is a consolidated document that may include 1099-INT, 1099-DIV, and 1099-B sections. Return ONLY valid JSON, no other text.
+
+{
+  "form_type": "1099-Composite",
+  "institution_name": "<name of the brokerage>",
+  "institution_tin": "<institution TIN/EIN>",
+  "recipient_name": "<recipient name>",
+  "recipient_tin": "<recipient TIN, may be partially masked>",
+  "account_number": "<account number>",
+  "tax_year": <four digit year as integer>,
+  "sections": {
+    "1099_int": {
+      "present": true/false,
+      "fields": [
+        {"label": "Box 1 - Interest income", "value": "<amount>", "schedule_line": "Schedule B, Part I"},
+        {"label": "Box 3 - Interest on U.S. Savings Bonds", "value": "<amount>", "schedule_line": "Schedule B, Part I"},
+        {"label": "Box 4 - Federal income tax withheld", "value": "<amount>", "schedule_line": "Form 1040, Line 25b"},
+        {"label": "Box 8 - Tax-exempt interest", "value": "<amount>", "schedule_line": "Form 1040, Line 2a"},
+        {"label": "Box 11 - Bond premium", "value": "<amount>", "schedule_line": null}
+      ]
+    },
+    "1099_div": {
+      "present": true/false,
+      "fields": [
+        {"label": "Box 1a - Total ordinary dividends", "value": "<amount>", "schedule_line": "Schedule B, Part II"},
+        {"label": "Box 1b - Qualified dividends", "value": "<amount>", "schedule_line": "Form 1040, Line 3a"},
+        {"label": "Box 2a - Total capital gain distributions", "value": "<amount>", "schedule_line": "Schedule D, Line 13"},
+        {"label": "Box 3 - Nondividend distributions", "value": "<amount>", "schedule_line": null},
+        {"label": "Box 4 - Federal income tax withheld", "value": "<amount>", "schedule_line": "Form 1040, Line 25b"},
+        {"label": "Box 6 - Foreign tax paid", "value": "<amount>", "schedule_line": "Form 1116"},
+        {"label": "Box 7 - Foreign country", "value": "<country name>", "schedule_line": null}
+      ]
+    },
+    "1099_b": {
+      "present": true/false,
+      "fields": [
+        {"label": "Short-term - proceeds", "value": "<amount>", "schedule_line": "Form 8949, Part I"},
+        {"label": "Short-term - cost basis", "value": "<amount>", "schedule_line": "Form 8949, Part I"},
+        {"label": "Short-term - gain/loss", "value": "<amount>", "schedule_line": "Schedule D, Line 7"},
+        {"label": "Long-term - proceeds", "value": "<amount>", "schedule_line": "Form 8949, Part II"},
+        {"label": "Long-term - cost basis", "value": "<amount>", "schedule_line": "Form 8949, Part II"},
+        {"label": "Long-term - gain/loss", "value": "<amount>", "schedule_line": "Schedule D, Line 15"}
+      ]
+    }
+  }
+}
+
+Rules:
+- Use "0.00" for boxes that are blank, empty, or show $0.
+- Format dollar amounts as strings with two decimal places.
+- Do NOT include dollar signs in values.
+- Set "present": false for sections that don't appear in the document.
+- For 1099-B: extract the summary totals, not individual lot details.
+- Extract the exact numbers shown — do not calculate or infer.

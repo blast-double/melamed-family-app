@@ -1,0 +1,31 @@
+Extract all fields from this IRS Form 1099-INT (Interest Income). Return ONLY valid JSON, no other text.
+
+{
+  "form_type": "1099-INT",
+  "payer_name": "<name of the payer/institution>",
+  "payer_tin": "<payer's TIN/EIN>",
+  "recipient_name": "<recipient name>",
+  "recipient_tin": "<recipient TIN, may be partially masked>",
+  "account_number": "<account number if shown>",
+  "tax_year": <four digit year as integer>,
+  "fields": [
+    {"label": "Box 1 - Interest income", "value": "<dollar amount>", "schedule_line": "Schedule B, Part I"},
+    {"label": "Box 2 - Early withdrawal penalty", "value": "<dollar amount>", "schedule_line": "Form 1040, Schedule 1, Line 18"},
+    {"label": "Box 3 - Interest on U.S. Savings Bonds", "value": "<dollar amount>", "schedule_line": "Schedule B, Part I"},
+    {"label": "Box 4 - Federal income tax withheld", "value": "<dollar amount>", "schedule_line": "Form 1040, Line 25b"},
+    {"label": "Box 5 - Investment expenses", "value": "<dollar amount>", "schedule_line": null},
+    {"label": "Box 6 - Foreign tax paid", "value": "<dollar amount>", "schedule_line": "Form 1116"},
+    {"label": "Box 8 - Tax-exempt interest", "value": "<dollar amount>", "schedule_line": "Form 1040, Line 2a"},
+    {"label": "Box 9 - Specified private activity bond interest", "value": "<dollar amount>", "schedule_line": null},
+    {"label": "Box 10 - Market discount", "value": "<dollar amount>", "schedule_line": null},
+    {"label": "Box 11 - Bond premium", "value": "<dollar amount>", "schedule_line": null},
+    {"label": "Box 13 - Bond premium on tax-exempt bond", "value": "<dollar amount>", "schedule_line": null}
+  ]
+}
+
+Rules:
+- Use "0.00" for boxes that are blank, empty, or show $0.
+- Format dollar amounts as strings with two decimal places (e.g., "4755.77").
+- Do NOT include dollar signs in the values.
+- If a field is not present on the form, use "0.00".
+- Extract the exact numbers shown — do not calculate or infer values.

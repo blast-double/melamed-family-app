@@ -1,0 +1,330 @@
+training_windows:
+- start: '2025-11-01'
+  end: '2026-03-31'
+  year: 2025
+patterns:
+- merchant_contains: amazon
+  target_category: Office Supplies
+  target_schedule: schedule_c
+  confidence: high
+  source: training_2025
+  occurrences: 7
+  avg_amount: -36.88
+- merchant_contains: amazon mx marketplacmexico city
+  target_category: Office Supplies
+  target_schedule: schedule_c
+  confidence: low
+  source: training_2025
+  note: 'Ambiguous: also appears as personal (Wedding)'
+  occurrences: 1
+- merchant_contains: check
+  target_category: Rent
+  target_schedule: schedule_c_home_office
+  confidence: medium
+  source: training_2025
+  occurrences: 1
+  avg_amount: -150.0
+- merchant_contains: cigna
+  target_category: Health Insurance
+  target_schedule: self_employed_deduction
+  confidence: high
+  source: training_2025
+  occurrences: 2
+  avg_amount: -379.0
+- merchant_contains: the home depot
+  target_category: '1771 - Maintenance '
+  target_schedule: schedule_e
+  confidence: high
+  source: aaron_review_2026-03-30
+  note: 'Hardware/appliance purchases for 1771 rental property. Training incorrectly
+    learned as personal because Monarch auto-categorized as Home Improvement.'
+  occurrences: 3
+- merchant_contains: clip mx voraz cuauhtemoc mex
+  target_category: Business Travel & Meals
+  target_schedule: schedule_c_meals
+  confidence: medium
+  source: training_2025
+  occurrences: 1
+  avg_amount: -234.57
+- merchant_contains: clip mx*barolo cuauhtemoc mex
+  target_category: Business Travel & Meals
+  target_schedule: schedule_c_meals
+  confidence: medium
+  source: training_2025
+  occurrences: 1
+  avg_amount: -229.97
+- merchant_contains: google one
+  target_category: Keynote - Software
+  target_schedule: schedule_c
+  confidence: high
+  source: training_2025
+  occurrences: 2
+  avg_amount: -2.17
+- merchant_contains: interest paid
+  target_category: Interest Income
+  target_schedule: reference
+  confidence: high
+  source: training_2025
+  occurrences: 4
+  avg_amount: 116.57
+- merchant_contains: interest payment
+  target_category: Interest Income
+  target_schedule: reference
+  confidence: high
+  source: training_2025
+  occurrences: 4
+  avg_amount: 12.05
+- merchant_contains: namecheap
+  target_category: Palisades Labs - Software
+  target_schedule: schedule_c
+  confidence: medium
+  source: training_2025
+  occurrences: 1
+  avg_amount: -159.96
+- merchant_contains: naturgymexi
+  target_category: Gas & Electric
+  target_schedule: schedule_c_home_office
+  confidence: medium
+  source: training_2025
+  occurrences: 1
+  avg_amount: -45.67
+- merchant_contains: new american funding
+  target_category: Mortgage
+  target_schedule: schedule_e
+  confidence: high
+  source: training_2025
+  occurrences: 2
+  avg_amount: -7955.57
+- merchant_contains: propay transfer tran achdd
+  target_category: Rental Income
+  target_schedule: schedule_e
+  confidence: high
+  source: training_2025
+  occurrences: 5
+  avg_amount: 4673.71
+- merchant_contains: property tax government
+  target_category: Property Tax
+  target_schedule: schedule_e
+  confidence: medium
+  source: training_2025
+  occurrences: 1
+  avg_amount: -18288.61
+- merchant_contains: rentredi.com
+  target_category: 1771 - Software
+  target_schedule: schedule_e
+  confidence: medium
+  source: training_2025
+  occurrences: 1
+  avg_amount: -120.0
+- merchant_contains: rest pipicha santa ciudad de mex mex
+  target_category: Business Travel & Meals
+  target_schedule: schedule_c_meals
+  confidence: medium
+  source: training_2025
+  occurrences: 1
+  avg_amount: -360.46
+- merchant_contains: restaurante feral ciudad de mex mex
+  target_category: Business Travel & Meals
+  target_schedule: schedule_c_meals
+  confidence: medium
+  source: training_2025
+  occurrences: 1
+  avg_amount: -209.88
+- merchant_contains: san francisco public utilities commission
+  target_category: 1771 - Water
+  target_schedule: schedule_e
+  confidence: high
+  source: training_2025
+  occurrences: 2
+  avg_amount: -308.34
+- merchant_contains: sunset
+  target_category: 1771 - Trash
+  target_schedule: schedule_e
+  confidence: medium
+  source: training_2025
+  occurrences: 1
+  avg_amount: -373.21
+- merchant_contains: verizon
+  target_category: Internet & Cable
+  target_schedule: schedule_c_home_office
+  confidence: high
+  source: training_2025
+  occurrences: 2
+  avg_amount: -79.99
+- merchant_contains: zelle
+  target_category: '1771 - Maintenance '
+  target_schedule: schedule_e
+  confidence: medium
+  source: training_2025
+  occurrences: 1
+  avg_amount: -140.0
+- merchant_contains: american airlines
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Air Fare'
+- merchant_contains: american express
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Credit Card Payment'
+- merchant_contains: apple
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Electronics'
+- merchant_contains: automatic payment
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Credit Card Payment'
+- merchant_contains: autopay rautopay
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Paychecks'
+- merchant_contains: bay jiu-jitsu
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Grappling'
+- merchant_contains: betterment
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Transfer'
+- merchant_contains: bicicleta publ ecobici ciudad de mex mex
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Public Transit'
+- merchant_contains: cappra restaurante rio de janeir bra
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Restaurants'
+- merchant_contains: charles schwab bank
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Transfer'
+- merchant_contains: chase
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Credit Card Payment'
+- merchant_contains: choperia cometa expr rio de janeir bra
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Personal Care'
+- merchant_contains: citi
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Credit Card Payment'
+- merchant_contains: duty free last brand rio de janeir bra
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Shopping'
+- merchant_contains: funds transfer
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Transfer'
+- merchant_contains: goldman sachs
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Transfer'
+- merchant_contains: gympass ciudad de mexico
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Fitness'
+- merchant_contains: lefties mex
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Clothing'
+- merchant_contains: misc prime cociudad de mex
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Restaurants'
+- merchant_contains: neveria postrefrut
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Ice Cream'
+- merchant_contains: oxxo
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Groceries'
+- merchant_contains: payment
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Auto Payment'
+- merchant_contains: perro de mundo ciudad de mex mex
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Pet Accessories'
+- merchant_contains: prime video
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Streaming'
+- merchant_contains: rest casa bruna ciudad de mex mex
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Coffee Shops'
+- merchant_contains: saint
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Restaurants'
+- merchant_contains: saint ciudad de mex mex
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Restaurants'
+- merchant_contains: spotify usa
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Music'
+- merchant_contains: sumesa oaxaca mercado
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Groceries'
+- merchant_contains: the best acai meier rio de janeir bra
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Restaurants'
+- merchant_contains: uber
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Taxi & Ride Shares'
+- merchant_contains: uber eats
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Food Delivery'
+- merchant_contains: venmo
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Transfer'
+- merchant_contains: wawa
+  target_category: null
+  confidence: high
+  source: training_2025
+  note: 'Personal: Restaurants'

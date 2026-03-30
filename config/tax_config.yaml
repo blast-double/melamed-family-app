@@ -1,0 +1,42 @@
+# Last Updated: 2026-03-29
+#
+# Per-year tax configuration. Updated annually during tax year setup.
+# Stores decisions that persist across sessions (active institutions,
+# conditional items, parameterized institution names).
+
+california_filing_status: undetermined  # resident | nonresident | undetermined
+ca_status_notes: "Aaron living full-time in Mexico City. Confirm with CPA."
+
+tax_years:
+  2024:
+    initialized: true
+    parameterized_institutions:
+      employer_name: "JustWorks"       # PEO for Orum (no longer relevant 2025+)
+      employer_1095c_name: "Orum"      # Actual employer (distinct from PEO)
+      loan_servicer_name: "New American Funding"
+    conditional_items:
+      employer_w2: true                # JustWorks W-2 from Orum employment
+      employer_1095c: true             # Orum 1095-C health coverage
+      coinbase_1099: true              # Crypto trades in 2024
+      coinbase_gainloss: true
+      coinbase_transaction_history: true  # SOL transaction detail
+      propay_1099k: true                 # ProPay issued 1099-K in 2024
+    cpa_package_submitted: false
+    cpa_package_date: null
+
+  2025:
+    initialized: true
+    parameterized_institutions:
+      employer_name: null              # No W-2 expected (Itero, no salary)
+      loan_servicer_name: "New American Funding"
+    conditional_items:
+      employer_w2: false               # No salary from Itero
+      employer_1095c: false            # No employer health coverage in 2025
+      coinbase_1099: false             # No crypto trades this year
+      coinbase_gainloss: false
+      coinbase_transaction_history: false
+      propay_1099k: false              # Active but below threshold, no 1099-K issued
+      schwab_bank: false               # Below 1099-INT reporting threshold
+      guideline_401k: false            # No contributions in 2025 (prior employer)
+    cpa_package_submitted: false
+    cpa_package_date: null

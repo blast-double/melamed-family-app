@@ -1,0 +1,736 @@
+# Last Updated: 2026-03-29
+#
+# Aaron's Monarch Money auto-categorization rules.
+# Extracted from Monarch Settings > Rules (204 total).
+# These represent Aaron's explicit intent for how transactions should be categorized.
+# Used by the categorization engine as Signal 2 (highest confidence after merchant history).
+#
+# Format mirrors Monarch's rule structure:
+#   match_type: "contains" or "exactly_matches"
+#   match_value: string or list of strings (OR logic)
+#   conditions: optional additional filters (debit amount, account, category)
+#   actions: recategorize, rename, add_tag, hide
+
+rules:
+  # --- Software & SaaS ---
+  - match: { merchant_contains: "monarch" }
+    conditions: { debit_gt: 0.00 }
+    actions: { recategorize: "Software", add_tag: "Subscription" }
+
+  - match: { merchant_contains: ["xappex", "jetbrains", "1password"] }
+    actions: { recategorize: "Keynote - Software" }
+
+  - match: { merchant_exactly: "godaddy.com" }
+    actions: { recategorize: "Keynote - Software" }
+
+  - match: { merchant_contains: "google" }
+    actions: { recategorize: "Keynote - Software" }
+
+  - match: { merchant_contains: ["data tree", "adobe"] }
+    actions: { recategorize: "Keynote - Software" }
+
+  - match: { merchant_exactly: "msft * msbill.info" }
+    actions: { recategorize: "Keynote - Software" }
+
+  - match: { merchant_contains: ["dropbox", "propertyradar"] }
+    actions: { recategorize: "Keynote - Software" }
+
+  - match: { merchant_contains: "salesforce" }
+    conditions: { debit_lt: 2000.00 }
+    actions: { recategorize: "Keynote - Software" }
+
+  - match: { merchant_exactly: "mixmax, inc." }
+    actions: { rename: "Mixmax", recategorize: "Keynote - Software" }
+
+  - match: { merchant_contains: "expensify" }
+    conditions: { debit_eq: 20.00 }
+    actions: { recategorize: "Keynote - Software" }
+
+  - match: { merchant_contains: "point.me" }
+    actions: { rename: "Point.Me", recategorize: "Software" }
+
+  - match: { merchant_contains: "ancestry.com" }
+    actions: { recategorize: "Software" }
+
+  - match: { merchant_exactly: "adobe" }
+    actions: { rename: "Adobe" }
+
+  - match: { merchant_exactly: "experian" }
+    conditions: { debit_gt: 200.00 }
+    actions: { recategorize: "Keynote - Software" }
+
+  # --- Rental Property (1771) ---
+  - match: { merchant_contains: "propay transfer" }
+    actions: { recategorize: "Rental Income" }
+
+  - match: { merchant_contains: "rentredi" }
+    actions: { recategorize: "1771 - Software" }
+
+  - match: { merchant_contains: "san francisco public utilities commission" }
+    actions: { recategorize: "1771 - Water" }
+
+  - match: { merchant_contains: "sunset scavenger" }
+    actions: { recategorize: "1771 - Trash" }
+
+  # --- Internet & Cable ---
+  - match: { merchant_exactly: ["verizon", "totalplay"] }
+    actions: { recategorize: "Internet & Cable" }
+
+  - match: { merchant_exactly: "paypal *totalplayte" }
+    actions: { rename: "Totalplay", recategorize: "Internet & Cable" }
+
+  # --- Transportation ---
+  - match: { merchant_exactly: "uber* trip ciudad de mex mex" }
+    actions: { rename: "Uber", recategorize: "Taxi & Ride Shares" }
+
+  - match: { merchant_exactly: "uber.com" }
+    actions: { rename: "Uber", recategorize: "Taxi & Ride Shares" }
+
+  - match: { merchant_contains: "clipper" }
+    actions: { rename: "Clipper Card", recategorize: "Public Transit" }
+
+  - match: { merchant_contains: ["trainline", "metrocard", "brightline"] }
+    actions: { recategorize: "Public Transit" }
+
+  - match: { merchant_exactly: "mta" }
+    actions: { recategorize: "Public Transit" }
+
+  - match: { merchant_exactly: ["lim*ride cost", "limescooter", "spin mobility", "revel", "lim*ride cost"] }
+    actions: { recategorize: "Scooters / Bikes" }
+
+  # --- Air Fare ---
+  - match: { merchant_contains: ["united airlines", "ua inflt"] }
+    actions: { rename: "United Airlines", recategorize: "Air Fare" }
+
+  - match: { merchant_contains: ["singapore airlines", "vivaaerobus", "aeromexico", "air france", "american airlines", "southwest airlines", "thai airways", "alaska airlines", "air canada", "aerolineas argentinas", "jetblue", "iberia", "british airways"] }
+    actions: { recategorize: "Air Fare" }
+
+  - match: { merchant_contains: ["airlines", "airline", "airways", "emirates", "iberia", "british airways", "virgin america"] }
+    actions: { recategorize: "Air Fare" }
+
+  - match: { merchant_exactly: "travel credit" }
+    actions: { recategorize: "Air Fare" }
+
+  # --- Travel ---
+  - match: { merchant_exactly: "clear new york" }
+    actions: { recategorize: "Travel Other" }
+
+  - match: { merchant_exactly: "travel" }
+    actions: { rename: "Travel Credit", recategorize: "Travel Other" }
+
+  # --- Food & Dining ---
+  - match: { merchant_contains: ["oxxo", "o ocholula mex mexico"] }
+    actions: { rename: "OXXO", recategorize: "Groceries" }
+
+  - match: { merchant_contains: "el califa" }
+    actions: { rename: "El Califa", recategorize: "Restaurants" }
+
+  - match: { merchant_exactly: ["patagonia ciudad de mex mex", "william shakes", "el diez", "tea connection", "beit rima", "sweetgreen", "wichcraft"] }
+    actions: { recategorize: "Restaurants" }
+
+  - match: { merchant_exactly: ["flour and water", "botanico"] }
+    actions: { recategorize: "Restaurants" }
+
+  - match: { merchant_contains: "palais des" }
+    actions: { recategorize: "Tea" }
+
+  - match: { merchant_contains: "harney" }
+    actions: { recategorize: "Tea" }
+
+  # --- Music & Entertainment ---
+  - match: { merchant_exactly: "itunes" }
+    actions: { recategorize: "iTunes" }
+
+  - match: { merchant_contains: "spotify" }
+    actions: { rename: "Spotify USA", recategorize: "Music" }
+
+  - match: { merchant_exactly: "udemy" }
+    actions: { recategorize: "Dues & Subscriptions" }
+
+  - match: { merchant_contains: "stubhub" }
+    actions: { recategorize: "Concerts" }
+
+  - match: { merchant_exactly: "ticketmaster" }
+    actions: { recategorize: "Concerts" }
+
+  - match: { merchant_contains: "tixr" }
+    actions: { recategorize: "Concerts" }
+
+  - match: { merchant_exactly: "www.zogsports.com" }
+    actions: { recategorize: "Entertainment & Recreation" }
+
+  # --- Streaming ---
+  - match: { merchant_exactly: "help.hbomax.com" }
+    actions: { recategorize: "Streaming" }
+
+  - match: { merchant_contains: "netflix" }
+    actions: { recategorize: "Streaming" }
+
+  # --- Health & Fitness ---
+  - match: { merchant_contains: "bay jiu jitsu" }
+    actions: { recategorize: "Grappling" }
+
+  - match: { merchant_contains: "sports world" }
+    actions: { recategorize: "Fitness" }
+
+  - match: { merchant_exactly: "operadora y administciudad de mexico" }
+    actions: { recategorize: "Fitness" }
+
+  - match: { merchant_exactly: "dofasting vilnius lt" }
+    actions: { recategorize: "Fitness" }
+
+  - match: { merchant_contains: "farm san pablo" }
+    actions: { recategorize: "Pharmacy" }
+
+  - match: { merchant_exactly: "bioptimizers usa" }
+    actions: { recategorize: "Nutritional Supplements" }
+
+  # --- Personal Care ---
+  - match: { merchant_exactly: ["diamond studio ciudad de mex mex", "diamond studio", "bell sf"] }
+    actions: { recategorize: "Hair" }
+
+  # --- Shoes & Clothing ---
+  - match: { merchant_contains: ["atoms", "thursday boots"] }
+    actions: { recategorize: "Shoes" }
+
+  - match: { merchant_contains: "greats" }
+    actions: { recategorize: "Shoes" }
+
+  - match: { merchant_contains: ["bonobos", "faherty", "icebreakers", "everlane", "suit supply", "suitsupply", "rodd", "lululemon", "vuori"] }
+    actions: { recategorize: "Clothing" }
+
+  # --- Alcohol ---
+  - match: { merchant_exactly: ["craft and commerce", "drunkendog", "brujas ciudad", "limantur", "gin gin", "wine", "beer"] }
+    actions: { recategorize: "Alcohol & Bars" }
+
+  - match: { merchant_exactly: "vanguard" }
+    actions: { recategorize: "Alcohol & Bars" }
+
+  - match: { merchant_exactly: "zaca mesa winery" }
+    actions: { recategorize: "Alcohol & Bars" }
+
+  - match: { merchant_exactly: "fess parker winery" }
+    actions: { recategorize: "Alcohol & Bars" }
+
+  - match: { merchant_exactly: "municipal winemakers" }
+    actions: { recategorize: "Alcohol & Bars" }
+
+  - match: { merchant_contains: "fess parker" }
+    actions: { recategorize: "Alcohol & Bars" }
+
+  # --- Taxes ---
+  - match: { merchant_contains: "california franchise tax board" }
+    actions: { recategorize: "State Tax" }
+
+  - match: { merchant_exactly: "internal revenue service" }
+    actions: { recategorize: "Federal Tax" }
+
+  # --- Financial ---
+  - match: { merchant_contains: "membership fee" }
+    actions: { recategorize: "Financial Fees" }
+
+  - match: { merchant_exactly: "interest payment" }
+    actions: { recategorize: "Interest Income" }
+
+  - match: { merchant_exactly: "dividend reinvestment" }
+    actions: { recategorize: "Buy Securities" }
+
+  - match: { merchant_exactly: "equifax" }
+    actions: { recategorize: "Credit Monitoring" }
+
+  - match: { merchant_exactly: "lemonade insurance" }
+    actions: { recategorize: "Renters Insurance" }
+
+  # --- Payments & Transfers ---
+  - match: { merchant_contains: ["autopay", "automatic payment"] }
+    conditions: { account_in: ["Costco (...1685)", "AAdvantage Platinum (...0456)", "ThankYou Preferred (...5402)", "Citi Prestige (...3041)"] }
+    actions: { recategorize: "Credit Card Payment" }
+
+  - match: { merchant_exactly: "synchrony bank" }
+    actions: { recategorize: "Credit Card Payment" }
+
+  # --- Pets ---
+  - match: { merchant_contains: "guidance" }
+    actions: { recategorize: "Guns & Ammunition" }
+
+  # --- Gas & Electric ---
+  - match: { merchant_contains: "naturgymexi" }
+    actions: { recategorize: "Gas & Electric" }
+
+  # --- Postage ---
+  - match: { merchant_contains: "usps" }
+    actions: { rename: "USPS", recategorize: "Postage & Shipping" }
+
+  # --- Shopping ---
+  - match: { merchant_exactly: ["amazon shop with points credit", "amazon.com"] }
+    actions: { recategorize: "Shopping" }
+
+  # --- Uber Eats ---
+  - match: { merchant_exactly: "uber* eats" }
+    actions: { rename: "Uber Eats" }
+
+  # --- Legal ---
+  - match: { merchant_exactly: "rounds & sutter llp" }
+    actions: { recategorize: "Keynote - Professional Services", add_tag: "Reimburse" }
+
+  # --- Hidden ---
+  - match: { category_equals: "Rebalancing" }
+    actions: { hide: true }
+
+  # ================================================================
+  # BATCH 2 — from screenshots 7-11
+  # ================================================================
+
+  # --- More Alcohol & Bars ---
+  - match: { merchant_exactly: "hitching pos, the" }
+    actions: { recategorize: "Alcohol & Bars" }
+
+  - match: { merchant_contains: "uncorked truckee" }
+    actions: { recategorize: "Alcohol & Bars" }
+
+  - match: { merchant_contains: "el deposito" }
+    actions: { recategorize: "Alcohol & Bars" }
+
+  # --- Streaming ---
+  - match: { merchant_exactly: "ufc tv" }
+    actions: { recategorize: "Streaming" }
+
+  # --- Dues & Subscriptions ---
+  - match: { merchant_exactly: "babbel" }
+    actions: { recategorize: "Dues & Subscriptions" }
+
+  - match: { merchant_contains: "babbel" }
+    actions: { recategorize: "Dues & Subscriptions" }
+
+  - match: { merchant_exactly: "crunchbase, inc." }
+    actions: { recategorize: "Dues & Subscriptions" }
+
+  # --- Financial Fees ---
+  - match: { merchant_contains: "fee" }
+    actions: { recategorize: "Financial Fees" }
+
+  - match: { merchant_exactly: "late fee reversal" }
+    actions: { rename: "LATE FEE REVERSAL", recategorize: "Financial Fees" }
+
+  - match: { merchant_exactly: "atm fee refund" }
+    actions: { rename: "ATM Fee Rebate", recategorize: "Financial Fees" }
+
+  # --- Postage & Shipping ---
+  - match: { merchant_contains: "the ups store" }
+    actions: { recategorize: "Postage & Shipping" }
+
+  # --- Keynote Software ---
+  - match: { merchant_contains: "squarespace" }
+    actions: { recategorize: "Keynote - Software" }
+
+  - match: { merchant_contains: "smartsheet" }
+    actions: { recategorize: "Keynote - Software" }
+
+  - match: { merchant_contains: "zapier.com" }
+    actions: { recategorize: "Keynote - Software" }
+
+  - match: { merchant_exactly: "namecheap" }
+    actions: { recategorize: "Keynote - Software" }
+
+  - match: { merchant_exactly: "hello" }
+    actions: { recategorize: "Keynote - Software" }
+
+  # --- Keynote Professional Services ---
+  - match: { merchant_exactly: "polito eppich associates llp" }
+    actions: { recategorize: "Keynote - Professional Services" }
+
+  - match: { merchant_exactly: "barry" }
+    actions: { rename: "BARRY LEE O'CONNOR", recategorize: "Keynote - Professional Services" }
+
+  - match: { merchant_exactly: "barry lee o'connor" }
+    actions: { recategorize: "Keynote - Professional Services" }
+
+  - match: { merchant_exactly: "rounds & sutter llp" }
+    actions: { recategorize: "Keynote - Professional Services" }
+
+  # --- Nutritional Supplements ---
+  - match: { merchant_contains: "bulletproof" }
+    actions: { recategorize: "Nutritional Supplements" }
+
+  - match: { merchant_contains: "hims & hers" }
+    actions: { recategorize: "Nutritional Supplements" }
+
+  # --- Fitness ---
+  - match: { merchant_exactly: "ouraring inc" }
+    actions: { recategorize: "Fitness Devices & Subscriptions" }
+
+  - match: { merchant_exactly: "j bodyworks inc." }
+    actions: { recategorize: "Fitness" }
+
+  # --- Restaurants ---
+  - match: { merchant_exactly: "project juice llc" }
+    actions: { recategorize: "Restaurants" }
+
+  - match: { merchant_exactly: "bpckt*el diez cuauhtemoc mex" }
+    actions: { recategorize: "Restaurants" }
+
+  - match: { merchant_contains: "lardo" }
+    actions: { recategorize: "Restaurants" }
+
+  # --- Itero ---
+  - match: { merchant_exactly: "auth0" }
+    actions: { recategorize: "Itero - Software" }
+
+  # --- Therapy ---
+  - match: { merchant_exactly: "james" }
+    actions: { recategorize: "Therapy" }
+
+  # --- Coffee Shops ---
+  - match: { merchant_contains: "coffee" }
+    actions: { recategorize: "Coffee Shops" }
+
+  - match: { merchant_contains: "casa bruna" }
+    actions: { recategorize: "Coffee Shops" }
+
+  - match: { merchant_contains: "tierra garat" }
+    actions: { recategorize: "Coffee Shops" }
+
+  # --- Scooters / Bikes ---
+  - match: { merchant_contains: ["bird* ride", "bird* fee"] }
+    actions: { recategorize: "Scooters / Bikes" }
+
+  # --- Groceries ---
+  - match: { merchant_exactly: "eli zabar's farm to table" }
+    actions: { recategorize: "Groceries" }
+
+  - match: { merchant_exactly: "napa farms market" }
+    actions: { recategorize: "Groceries" }
+
+  - match: { merchant_contains: "cornershop" }
+    actions: { recategorize: "Groceries" }
+
+  - match: { merchant_contains: "city market" }
+    actions: { rename: "City Market", recategorize: "Groceries" }
+
+  # --- State Tax ---
+  - match: { merchant_exactly: "ca secretary state" }
+    actions: { recategorize: "State Tax" }
+
+  # --- Clothing ---
+  - match: { merchant_contains: "ice breakers" }
+    actions: { recategorize: "Clothing" }
+
+  # --- Grappling ---
+  - match: { merchant_contains: ["md academy", "fanatics"] }
+    actions: { recategorize: "Grappling" }
+
+  # --- Cell Phone ---
+  - match: { merchant_exactly: "tmobile*auto pay" }
+    actions: { recategorize: "Cell Phone" }
+
+  # --- Food Delivery ---
+  - match: { merchant_contains: ["*rappi", "rappi", "doordash", "caviar"] }
+    actions: { recategorize: "Food Delivery" }
+
+  # --- Furniture & Housewares ---
+  - match: { merchant_contains: "ikano" }
+    actions: { rename: "IKEA", recategorize: "Furniture & Housewares" }
+
+  - match: { merchant_contains: ["williams-sonoma", "restoration hardware", "zara home"] }
+    actions: { recategorize: "Furniture & Housewares" }
+
+  # --- Shopping ---
+  - match: { merchant_contains: ["globalblue", "global blue"] }
+    actions: { recategorize: "Shopping" }
+
+  # --- Car Rentals ---
+  - match: { merchant_exactly: ["sixt9498144223", "sixt", "hertz", "enterprise rent-a-car", "europcar", "alamo rent-a-car", "avis", "budget rent", "getaround", "turo", "zipcar"] }
+    actions: { recategorize: "Car Rentals" }
+
+  # --- Taxi ---
+  - match: { merchant_contains: "taxi" }
+    actions: { recategorize: "Taxi & Ride Shares" }
+
+  # --- Auto Insurance ---
+  - match: { merchant_exactly: "geico *auto" }
+    actions: { recategorize: "Auto Insurance" }
+
+  # --- Entertainment ---
+  - match: { merchant_contains: "nintendo" }
+    actions: { recategorize: "Entertainment & Recreation" }
+
+  # --- Skiing ---
+  - match: { merchant_contains: ["alpine meadows", "mica", "sugar bowl ticket", "icon pass", "squaw valley resort", "palisades tickets"] }
+    actions: { recategorize: "Skiing" }
+
+  # --- Public Transit ---
+  - match: { merchant_contains: "italiarail.com" }
+    actions: { recategorize: "Public Transit" }
+
+  # --- 1771 Water (alternate match) ---
+  - match: { merchant_contains: "sfpuc web_pay" }
+    actions: { rename: "San Francisco Public Utilities Commission", recategorize: "1771 - Water" }
+
+  # --- Museums ---
+  - match: { merchant_contains: ["museo", "museum"] }
+    actions: { recategorize: "Museums & Galleries" }
+
+  # --- Ice Cream ---
+  - match: { merchant_contains: ["neveria", "helado", "ice cream", "gelato", "gelateria", "morgenstern's", "salt & straw", "sorbet", "super creamy", "supercreamy"] }
+    actions: { recategorize: "Ice Cream" }
+
+  - match: { merchant_contains: "paleta" }
+    actions: { recategorize: "Ice Cream" }
+
+  # --- Property Tax ---
+  - match: { merchant_exactly: "ttx property tax government" }
+    actions: { recategorize: "Property Tax" }
+
+  # --- Rent (personal, $150 checks) ---
+  - match: { merchant_contains: "check paid" }
+    conditions: { debit_eq: 150.00 }
+    actions: { recategorize: "Rent" }
+
+  # --- Gas & Electric ---
+  - match: { merchant_contains: ["pgande web online", "bilt onlinepymt"] }
+    conditions: { debit_lt: 500.00 }
+    actions: { recategorize: "Gas & Electric" }
+
+  # ================================================================
+  # BATCH 3 — final screenshots (12-16)
+  # ================================================================
+
+  # --- Interest Income ---
+  - match: { merchant_contains: "bank int" }
+    actions: { recategorize: "Interest Income" }
+
+  - match: { merchant_exactly: "sav increase int" }
+    actions: { recategorize: "Interest Income" }
+
+  # --- Fitness ---
+  - match: { merchant_exactly: "tennis tahoe donner" }
+    actions: { recategorize: "Fitness" }
+
+  # --- Gas & Electric (more) ---
+  - match: { merchant_contains: ["so calif edison", "edison"] }
+    actions: { recategorize: "Gas & Electric" }
+
+  - match: { merchant_contains: "naturgy" }
+    actions: { recategorize: "Gas & Electric" }
+
+  - match: { merchant_exactly: "bilt onlinepymt" }
+    actions: { recategorize: "Gas & Electric" }
+
+  # --- Water ---
+  - match: { merchant_contains: ["city santa ba", "city santa barbara"] }
+    actions: { recategorize: "Water" }
+
+  # --- Restaurants (more) ---
+  - match: { merchant_exactly: "molino el pujol" }
+    actions: { recategorize: "Restaurants" }
+
+  - match: { merchant_exactly: "azul condesa" }
+    actions: { recategorize: "Restaurants" }
+
+  - match: { merchant_exactly: "laschalupitas" }
+    actions: { recategorize: "Restaurants" }
+
+  - match: { merchant_exactly: "patagonia" }
+    actions: { recategorize: "Restaurants" }
+
+  - match: { merchant_exactly: "saint" }
+    actions: { recategorize: "Restaurants" }
+
+  - match: { merchant_contains: "casa mono" }
+    actions: { recategorize: "Restaurants" }
+
+  - match: { merchant_contains: "saint ciudad" }
+    actions: { recategorize: "Restaurants" }
+
+  - match: { merchant_contains: "ciena" }
+    actions: { recategorize: "Restaurants" }
+
+  - match: { merchant_contains: "vinopremier" }
+    actions: { recategorize: "Restaurants" }
+
+  - match: { merchant_contains: "rest madonna" }
+    actions: { recategorize: "Restaurants" }
+
+  - match: { merchant_contains: "alfil" }
+    actions: { rename: "Alfil Arabe Restaurant", recategorize: "Restaurants" }
+
+  - match: { merchant_contains: "saint ciudad de mex" }
+    actions: { recategorize: "Restaurants" }
+
+  - match: { merchant_exactly: "voraz" }
+    actions: { recategorize: "Restaurants" }
+
+  - match: { merchant_contains: "saint" }
+    actions: { rename: "Saint", recategorize: "Restaurants" }
+
+  # --- Entertainment ---
+  - match: { merchant_exactly: "groupon" }
+    actions: { recategorize: "Entertainment & Recreation" }
+
+  - match: { merchant_exactly: "fifth arrow" }
+    actions: { recategorize: "Entertainment & Recreation" }
+
+  # --- Groceries (more) ---
+  - match: { merchant_contains: "prime condesa" }
+    actions: { recategorize: "Groceries" }
+
+  - match: { merchant_contains: "juesto" }
+    actions: { recategorize: "Groceries" }
+
+  - match: { merchant_contains: "sumesa" }
+    actions: { rename: "Sumesa Oaxaca Mercado", recategorize: "Groceries" }
+
+  # --- Personal Care ---
+  - match: { merchant_exactly: "l'occitane" }
+    actions: { recategorize: "Personal Care" }
+
+  # --- Golf ---
+  - match: { merchant_contains: "golf" }
+    actions: { recategorize: "Golf" }
+
+  # --- Laundry ---
+  - match: { merchant_contains: "laundry" }
+    actions: { recategorize: "Laundry" }
+
+  # --- Boating ---
+  - match: { merchant_contains: "stewarts marine" }
+    actions: { recategorize: "Boating" }
+
+  # --- Furniture & Housewares (more) ---
+  - match: { merchant_contains: "temu" }
+    actions: { recategorize: "Furniture & Housewares" }
+
+  # --- Amazon ---
+  - match: { merchant_contains: "amazon marketplace" }
+    actions: { rename: "Amazon" }
+
+  - match: { merchant_contains: "amazon" }
+    actions: { recategorize: "Office Supplies" }
+
+  # --- Itero (more) ---
+  - match: { merchant_exactly: "slack" }
+    actions: { recategorize: "Itero - Software" }
+
+  # --- Account-based rules ---
+  - match: { account_equals: "Chase Ink Unlimited (Itero)" }
+    actions: { hide: true }
+
+  - match: { account_equals: "Chase Ink Unlimited (Itero)" }
+    actions: { recategorize: "Itero - Software" }
+
+  # --- Cell Phone (more) ---
+  - match: { merchant_contains: ["t-mobile", "tmobile"] }
+    actions: { recategorize: "Cell Phone" }
+
+  # --- Keynote Income ---
+  - match: { merchant_contains: "wells fargo" }
+    conditions: { account_equals: "Personal Savings (...9622)" }
+    actions: { recategorize: "Keynote Income" }
+
+  # --- Keynote Software (more) ---
+  - match: { merchant_exactly: "first american data" }
+    actions: { recategorize: "Keynote - Software" }
+
+  # --- 1771 Trash (alternate) ---
+  - match: { merchant_contains: "sunset" }
+    actions: { recategorize: "1771 - Trash" }
+
+  # --- Grappling (more) ---
+  - match: { merchant_contains: "jiu-jitsu" }
+    actions: { recategorize: "Grappling" }
+
+  # --- Ice Cream (more) ---
+  - match: { merchant_contains: ["yogurt", "frozen"] }
+    actions: { recategorize: "Ice Cream" }
+
+  - match: { merchant_contains: "helados" }
+    actions: { recategorize: "Ice Cream" }
+
+  - match: { original_statement_contains: "neveria" }
+    conditions: { merchant_contains: "neveria" }
+    actions: { recategorize: "Ice Cream" }
+
+  - match: { merchant_contains: "neveria" }
+    actions: { recategorize: "Ice Cream" }
+
+  - match: { original_statement_contains: "neveria postrefrut" }
+    actions: { rename: "Neveria Postrefrut", recategorize: "Ice Cream" }
+
+  # --- Spa & Massage ---
+  - match: { merchant_contains: "koti" }
+    actions: { recategorize: "Spa & Massage" }
+
+  # --- Pharmacy (original statement match) ---
+  - match: { original_statement_contains: "farm simi" }
+    actions: { recategorize: "Pharmacy" }
+
+  # --- Public Transit (more) ---
+  - match: { merchant_contains: "ecobici" }
+    actions: { recategorize: "Public Transit" }
+
+  # --- Rename only ---
+  - match: { original_statement_contains: "club sorb" }
+    actions: { rename: "Club Sorbet" }
+
+  # --- Uber Eats (Mexico) ---
+  - match: { merchant_exactly: "uber* eats ciudad de mex mex" }
+    actions: { rename: "Uber Eats", recategorize: "Restaurants" }
+
+  # --- Air Fare (more) ---
+  - match: { merchant_contains: "avianca" }
+    actions: { recategorize: "Air Fare" }
+
+  - match: { merchant_exactly: "mem rewards airline tax offset fee" }
+    actions: { recategorize: "Air Fare" }
+
+  # --- Health Insurance ---
+  - match: { merchant_exactly: "cigna" }
+    actions: { recategorize: "Health Insurance" }
+
+  # --- Original statement renames ---
+  - match: { original_statement_contains: "zorzal" }
+    actions: { rename: "REST ZORZAL CIUDAD DE MEX MEX" }
+
+  - match: { original_statement_contains: "pipicha" }
+    actions: { rename: "REST PIPICHA SANTA CIUDAD DE MEX MEX" }
+
+  - match: { original_statement_contains: "gympass" }
+    actions: { rename: "GYMPASS CIUDAD DE MEXICO", recategorize: "Fitness" }
+
+  - match: { original_statement_contains: "perro de" }
+    actions: { rename: "PERRO DE MUNDO CIUDAD DE MEX MEX", recategorize: "Pet Accessories" }
+
+  # --- Nails ---
+  - match: { merchant_contains: "nailkery" }
+    actions: { recategorize: "Nails" }
+
+  # --- Fitness (more, koti duplicate for different context) ---
+  - match: { merchant_contains: "koti" }
+    actions: { recategorize: "Fitness" }
+
+  # --- Coffee Shops (more) ---
+  - match: { merchant_contains: "casa bruna" }
+    actions: { rename: "REST CASA BRUNA CIUDAD DE MEX MEX", recategorize: "Coffee Shops" }
+
+  - match: { merchant_contains: "panaderia emme" }
+    actions: { rename: "Panaderia Emme", recategorize: "Coffee Shops" }
+
+  # --- Clothing (more) ---
+  - match: { merchant_contains: "lefties" }
+    actions: { recategorize: "Clothing" }
+
+  # --- Propay (duplicate/alternate) ---
+  - match: { merchant_contains: "propay" }
+    actions: { recategorize: "Rental Income" }
+
+  # --- Transfers ---
+  - match: { merchant_contains: "funds transfer" }
+    actions: { recategorize: "Transfer" }
+
+  # --- Streaming (more) ---
+  - match: { merchant_contains: "prime video" }
+    actions: { recategorize: "Streaming" }
+
+  # --- Rename only (luisedgarvenc → Som) ---
+  - match: { merchant_contains: "luisedgarvenc" }
+    actions: { rename: "Som" }

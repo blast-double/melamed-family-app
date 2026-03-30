@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Credentials & secrets
+.env
+.env.local
+.env.*.local
+execution/.credentials/
+.mm/
+
+# Node / Next.js
+node_modules/
+.next/
+.vercel/
+
+# OS
+.DS_Store
+
+# Local / session
+.mcp.json
+skills-lock.json
+temp_files/
+
+# Tax documents (sensitive PDFs — stay on Dropbox, not GitHub)
+tax_document_archive/
+taxes/
+
+# Operational artifacts
+.rename_manifest.json

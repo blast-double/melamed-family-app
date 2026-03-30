@@ -1,0 +1,559 @@
+batches:
+- batch_id: batch_1_uncategorized
+  applied_at: '2026-03-29T10:54:34.107329'
+  changes_count: 31
+  changes:
+  - transaction_id: '222607906942654578'
+    date: '2025-08-11'
+    merchant: Fielmann Bologna It
+    amount: -617.18
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Eyecare
+    new_category_id: '166182889602587161'
+  - transaction_id: '218446996290312354'
+    date: '2025-08-07'
+    merchant: Apple
+    amount: -28.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '217898257812199730'
+    date: '2025-08-01'
+    merchant: Apple
+    amount: -27.98
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '217450979093813716'
+    date: '2025-07-27'
+    merchant: Apple
+    amount: -38.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '217360419674823160'
+    date: '2025-07-26'
+    merchant: EXPRESSVPN
+    amount: -116.95
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Keynote - Software
+    new_category_id: '166219422947777126'
+  - transaction_id: '217360414317648200'
+    date: '2025-07-26'
+    merchant: Apple
+    amount: -2.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '217088934756391737'
+    date: '2025-07-23'
+    merchant: Apple
+    amount: -12.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '215097129832716430'
+    date: '2025-07-01'
+    merchant: Apple
+    amount: -3.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '214644346835867897'
+    date: '2025-06-26'
+    merchant: Apple
+    amount: -2.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '214372941308270757'
+    date: '2025-06-23'
+    merchant: Apple
+    amount: -12.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '213557826557220986'
+    date: '2025-06-14'
+    merchant: Com Rap Senkaa
+    amount: -3.71
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Restaurants
+    new_category_id: '166133957812984517'
+  - transaction_id: '212290323812096877'
+    date: '2025-05-31'
+    merchant: Apple
+    amount: -3.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '211837426775268258'
+    date: '2025-05-26'
+    merchant: Apple
+    amount: -2.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '211559583282534583'
+    date: '2025-05-23'
+    merchant: Apple
+    amount: -12.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '211294363073026449'
+    date: '2025-05-20'
+    merchant: Apple
+    amount: -13.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '210026604181756619'
+    date: '2025-05-06'
+    merchant: Apple
+    amount: -30.98
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '209573634229050292'
+    date: '2025-05-01'
+    merchant: Apple
+    amount: -3.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '209120853988907498'
+    date: '2025-04-26'
+    merchant: Apple
+    amount: -2.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '208849180869958198'
+    date: '2025-04-23'
+    merchant: Apple
+    amount: -12.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '203982346717928045'
+    date: '2025-02-28'
+    merchant: Apple
+    amount: -6.98
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '203806682806131681'
+    date: '2025-02-26'
+    merchant: Apple
+    amount: -2.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '203806682806131682'
+    date: '2025-02-23'
+    merchant: Apple
+    amount: -12.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '203806682806131683'
+    date: '2025-02-22'
+    merchant: Apple
+    amount: -102.98
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '202783862315719329'
+    date: '2025-02-15'
+    merchant: Magazzino
+    amount: -100.74
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Restaurants
+    new_category_id: '166133957812984517'
+  - transaction_id: '202783862315719328'
+    date: '2025-02-15'
+    merchant: Com Rap Maizajo
+    amount: -26.83
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Restaurants
+    new_category_id: '166133957812984517'
+  - transaction_id: '201447749619718762'
+    date: '2025-01-31'
+    merchant: Apple
+    amount: -3.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '200952933577300989'
+    date: '2025-01-26'
+    merchant: Apple
+    amount: -2.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '200770647023065113'
+    date: '2025-01-24'
+    merchant: Apple
+    amount: -9.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '200676578217334861'
+    date: '2025-01-23'
+    merchant: Apple
+    amount: -12.99
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '200313317898754092'
+    date: '2025-01-18'
+    merchant: Apple
+    amount: -121.98
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Software
+    new_category_id: '166182798792759804'
+  - transaction_id: '198750241654217183'
+    date: '2025-01-01'
+    merchant: Cherryhoggs
+    amount: -46.0
+    old_category: Uncategorized
+    old_category_id: '166133957812984541'
+    new_category: Pets
+    new_category_id: '166133957812984522'
+- batch_id: batch_2_3_4_5_small_groups
+  applied_at: '2026-03-29T11:09:59.800535'
+  changes_count: 9
+  changes:
+  - transaction_id: '228353061424371818'
+    date: '2025-11-24'
+    merchant: Check
+    old_category: Check
+    new_category: Rent
+  - transaction_id: '225983431280073087'
+    date: '2025-10-29'
+    merchant: Check
+    old_category: Check
+    new_category: Rent
+  - transaction_id: '221089687164590145'
+    date: '2025-09-05'
+    merchant: Goldman Sachs
+    old_category: Financial & Legal Services
+    new_category: Transfer
+  - transaction_id: '218554170013293456'
+    date: '2025-08-08'
+    merchant: Goldman Sachs
+    old_category: Financial & Legal Services
+    new_category: Transfer
+  - transaction_id: '229496659695016463'
+    date: '2025-12-06'
+    merchant: IZLAH
+    old_category: Miscellaneous
+    new_category: Restaurants
+  - transaction_id: '211211950169954603'
+    date: '2025-05-15'
+    merchant: SOHO LUDLOW
+    old_category: Miscellaneous
+    new_category: Dues & Subscriptions
+  - transaction_id: '203329035287304613'
+    date: '2025-02-18'
+    merchant: SOHO LUDLOW
+    old_category: Miscellaneous
+    new_category: Dues & Subscriptions
+  - transaction_id: '213661406264989729'
+    date: '2025-06-16'
+    merchant: Wells Fargo
+    old_category: Financial Fees
+    new_category: Transfer
+  - transaction_id: '210766318650169994'
+    date: '2025-05-14'
+    merchant: Wells Fargo
+    old_category: Financial Fees
+    new_category: Transfer
+- batch_id: batch_fixes_amex_soho
+  applied_at: '2026-03-29T11:15:45.964635'
+  changes_count: 6
+  changes:
+  - transaction_id: '222607906942654699'
+    date: '2025-03-07'
+    merchant: AMEX Reimbursement
+    old_category: Financial Fees
+    new_category: Credit Card Annual Fees
+  - transaction_id: '222607906942654698'
+    date: '2025-03-07'
+    merchant: AMEX Reimbursement
+    old_category: Financial Fees
+    new_category: Credit Card Annual Fees
+  - transaction_id: '227702617097280348'
+    date: '2025-11-17'
+    merchant: SOHO LUDLOW
+    old_category: Dues & Subscriptions
+    new_category: Entertainment & Recreation
+  - transaction_id: '219344522908440945'
+    date: '2025-08-14'
+    merchant: SOHO LUDLOW
+    old_category: Dues & Subscriptions
+    new_category: Entertainment & Recreation
+  - transaction_id: '211211950169954603'
+    date: '2025-05-15'
+    merchant: SOHO LUDLOW
+    old_category: Dues & Subscriptions
+    new_category: Entertainment & Recreation
+  - transaction_id: '203329035287304613'
+    date: '2025-02-18'
+    merchant: SOHO LUDLOW
+    old_category: Dues & Subscriptions
+    new_category: Entertainment & Recreation
+- batch_id: batch_restaurants_biz_meals
+  applied_at: '2026-03-29T11:21:39.424145'
+  changes_count: 13
+  changes:
+  - transaction_id: '222607578929208175'
+    date: '2025-08-16'
+    merchant: Le Phebus Joucas Fra Debit
+    amount: -693.59
+    old_category: Restaurants
+    new_category: Business Travel & Meals
+  - transaction_id: '222607906942654614'
+    date: '2025-07-17'
+    merchant: Saint
+    amount: -507.37
+    old_category: Restaurants
+    new_category: Business Travel & Meals
+  - transaction_id: '222607906942654554'
+    date: '2025-08-21'
+    merchant: Saint
+    amount: -500.86
+    old_category: Restaurants
+    new_category: Business Travel & Meals
+  - transaction_id: '207400983016413333'
+    date: '2025-04-07'
+    merchant: Hotel Rest Octaviano
+    amount: -397.44
+    old_category: Restaurants
+    new_category: Business Travel & Meals
+  - transaction_id: '230932376989113183'
+    date: '2025-12-20'
+    merchant: REST PIPICHA SANTA CIUDAD DE MEX MEX
+    amount: -360.46
+    old_category: Restaurants
+    new_category: Business Travel & Meals
+  - transaction_id: '231090775878965970'
+    date: '2025-12-23'
+    merchant: Clip Mx Voraz Cuauhtemoc Mex
+    amount: -234.57
+    old_category: Restaurants
+    new_category: Business Travel & Meals
+  - transaction_id: '230279302048029328'
+    date: '2025-12-13'
+    merchant: CLIP MX*BAROLO CUAUHTEMOC MEX
+    amount: -229.97
+    old_category: Restaurants
+    new_category: Business Travel & Meals
+  - transaction_id: '228992593996978780'
+    date: '2025-11-27'
+    merchant: RESTAURANTE FERAL CIUDAD DE MEX MEX
+    amount: -209.88
+    old_category: Restaurants
+    new_category: Business Travel & Meals
+  - transaction_id: '222607578929208164'
+    date: '2025-08-19'
+    merchant: Saint
+    amount: -198.67
+    old_category: Restaurants
+    new_category: Business Travel & Meals
+  - transaction_id: '208125051906725915'
+    date: '2025-04-15'
+    merchant: Rest Galanga Thai
+    amount: -183.14
+    old_category: Restaurants
+    new_category: Business Travel & Meals
+  - transaction_id: '200222642315368700'
+    date: '2025-01-18'
+    merchant: Soho House Mexico City
+    amount: -179.97
+    old_category: Restaurants
+    new_category: Business Travel & Meals
+  - transaction_id: '207219921894152902'
+    date: '2025-04-05'
+    merchant: Soho House
+    amount: -143.27
+    old_category: Restaurants
+    new_category: Business Travel & Meals
+  - transaction_id: '208306128795376345'
+    date: '2025-04-17'
+    merchant: Soho House
+    amount: -6.94
+    old_category: Restaurants
+    new_category: Business Travel & Meals
+
+- batch_id: corrections_aaron_review_2026-03-29
+  applied_at: '2026-03-29T20:09:26.129477'
+  changes_count: 5
+  description: "Aaron reviewed /triage dashboard and identified misclassified transactions"
+  changes:
+  - transaction_id: '222607578929208205'
+    date: '2025-08-03'
+    merchant: Airbnb
+    amount: 1729.11
+    old_category: Airbnb Income
+    old_category_id: '166167503828065278'
+    new_category: Airbnb Stay
+    new_category_id: '166182807164590602'
+    reason: Refund from Airbnb stay, not rental income
+  - transaction_id: '206057465737026423'
+    date: '2025-03-24'
+    merchant: Citibank
+    amount: 6655.98
+    old_category: Other Income
+    old_category_id: '166133957812984499'
+    new_category: Transfer
+    new_category_id: '166133957812984553'
+    reason: Loan from Citibank to Itero, not income
+  - transaction_id: '239417584863320592'
+    date: '2025-09-23'
+    merchant: Barclays - Cards
+    amount: 99.0
+    old_category: Other Income
+    old_category_id: '166133957812984499'
+    new_category: Transfer
+    new_category_id: '166133957812984553'
+    reason: Not income per Aaron review
+  - transaction_id: '224803890544155629'
+    date: '2025-10-16'
+    merchant: Zelle
+    amount: 90.0
+    old_category: Business Income
+    old_category_id: '166133957812984498'
+    new_category: Transfer
+    new_category_id: '166133957812984553'
+    reason: Accidental payment received, kept, immaterial
+  - transaction_id: '200494593445370629'
+    date: '2025-01-20'
+    merchant: Barra Grana
+    amount: -93.29
+    old_category: Business Utilities & Communication
+    old_category_id: '166133957812984545'
+    new_category: Restaurants
+    new_category_id: '166133957812984517'
+    reason: Mexico City restaurant, not a business expense
+
+- batch_id: corrections_aaron_review_2_2026-03-29
+  applied_at: '2026-03-29T20:40:20.278178'
+  changes_count: 3
+  description: "Round 2 — Federal Tax refund removed, wedding expense, Clear travel"
+  changes:
+  - transaction_id: '229715171097090250'
+    date: '2025-12-10'
+    merchant: Internal Revenue Service
+    amount: 16336.11
+    old_category: Federal Tax
+    new_category: Transfer
+    reason: IRS refund — not relevant for CPA, removing from tax schedules
+  - transaction_id: '225876764197559129'
+    date: '2025-10-20'
+    merchant: California Business
+    amount: -250.0
+    old_category: Business Income
+    new_category: Wedding
+    reason: Wedding photography expense, not business income
+  - transaction_id: '222607659245935026'
+    date: '2025-09-03'
+    merchant: Clear
+    amount: -294.0
+    old_category: Itero - Software
+    new_category: Travel Other
+    reason: Clear is travel pre-screening, not software
+
+- batch_id: corrections_aaron_review_4_2026-03-29
+  applied_at: '2026-03-29T22:00:00'
+  changes_count: 1
+  description: "Zelle payment to Jose is 1771 maintenance, not 140"
+  changes:
+  - transaction_id: '226446958009686086'
+    date: '2025-11-04'
+    merchant: Zelle
+    amount: -140.0
+    old_category: "140 - Maintenance"
+    old_category_id: '166170595217807654'
+    new_category: "1771 - Maintenance "
+    new_category_id: '166170580069030120'
+    reason: "$140 Zelle to Jose (1771 11th Ave handyman), wrong property"
+
+- batch_id: corrections_expense_hunt_2026-03-30
+  applied_at: '2026-03-30T01:00:00'
+  changes_count: 7
+  description: "Expense hunt — Home Depot (Keynote + 1771), Comida Brad (restaurant not gas), Mooney (Italian transit not gas), Zight (Itero software)"
+  changes:
+  - date: '2025-07-31'
+    merchant: The Home Depot
+    amount: -680.76
+    old_category: Home Improvement
+    new_category: Keynote - Real Estate
+    reason: Keynote expense, Aaron will reimburse from Keynote
+  - date: '2025-11-08'
+    merchant: The Home Depot
+    amount: -1913.98
+    old_category: Home Improvement
+    new_category: "1771 - Maintenance "
+    reason: Refrigerator for 1771 11th Ave rental property
+  - date: '2025-04-25'
+    merchant: Comida Brad
+    amount: -75.42
+    old_category: Gas
+    new_category: Restaurants
+    reason: Restaurant in Cuauhtemoc CDMX, miscategorized as Gas
+  - date: '2025-06-13'
+    merchant: Comida Brad
+    amount: -86.25
+    old_category: Gas
+    new_category: Restaurants
+    reason: Restaurant in Cuauhtemoc CDMX, miscategorized as Gas
+  - date: '2025-07-25'
+    merchant: Comida Brad
+    amount: -66.11
+    old_category: Gas
+    new_category: Restaurants
+    reason: Restaurant in Cuauhtemoc CDMX, miscategorized as Gas
+  - date: '2025-08-10'
+    merchant: Mooney Pagopa Checkout Milano
+    amount: -36.80
+    old_category: Gas
+    new_category: Travel Other
+    reason: Italian government payment system (parking/transit), Milan
+  - date: '2025-04-01'
+    merchant: Zight
+    amount: -192.00
+    old_category: Personal
+    new_category: Itero - Software
+    reason: Screen recording SaaS, Itero business expense

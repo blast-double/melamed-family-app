@@ -1,0 +1,32 @@
+Extract all fields from this IRA Tax Statement / 5498-FMV (Fair Market Value and Required Minimum Distribution Statement). Return ONLY valid JSON, no other text.
+
+{
+  "form_type": "5498-FMV",
+  "institution_name": "<name of the institution, e.g. Betterment>",
+  "custodian_name": "<name of the IRA custodian, e.g. Inspira Financial Trust, LLC>",
+  "custodian_tin": "<custodian/payer TIN/EIN>",
+  "recipient_name": "<recipient name>",
+  "recipient_tin": "<recipient TIN, may be partially masked>",
+  "account_number": "<full account number>",
+  "account_type": "<Traditional IRA or Roth IRA>",
+  "tax_year": <four digit year as integer>,
+  "fields": [
+    {"label": "Fair market value of account (year-end)", "value": "<dollar amount>", "schedule_line": "Form 5498, Box 5 / FBAR reference"},
+    {"label": "Required Minimum Distribution next year", "value": "<Yes or No>", "schedule_line": "Form 5498, Box 11"}
+  ],
+  "contributions": [
+    {"date": "<YYYY-MM-DD>", "type": "<Contribution type, e.g. 2025 Tax Year Contribution>", "amount": "<dollar amount>"}
+  ],
+  "total_contributions": "<sum of all contributions as dollar amount>"
+}
+
+Rules:
+- Use "0.00" for fields that are blank, empty, or show $0.
+- Format dollar amounts as strings with two decimal places (e.g., "131545.14").
+- Do NOT include dollar signs in the values.
+- If a field is not present on the form, use "0.00" for amounts or "" for text.
+- Extract the exact numbers shown — do not calculate or infer values.
+- For contributions: list each individual contribution with its date, type, and amount.
+- If there is no transaction detail / contributions section, return an empty contributions array.
+- total_contributions should be "0.00" if no contributions are listed.
+- The account_type should be exactly "Traditional IRA" or "Roth IRA" as shown on the form.

@@ -1,0 +1,23 @@
+# Last Updated: 2025-03-25
+
+family:
+  primary:
+    name: Aaron Melamed
+    role: Head of household
+    citizenship: US
+    current_location: Mexico City, Mexico
+  spouse:
+    name: Eugenia Guadalupe Canul Celis
+    citizenship: Mexican
+    current_location: Mexico City, Mexico
+  children:
+    - status: expected  # Not yet born as of 2025-03-25
+  residence:
+    current: Mexico City, Mexico
+    property: 1771 11th Ave, San Francisco, CA  # Rental property
+  ecosystem:
+    email: Google (Gmail)
+    calendar: Google Calendar
+    task_management: Asana (planned)
+    budgeting: Monarch Money
+    password_manager: TBD (separate initiative)

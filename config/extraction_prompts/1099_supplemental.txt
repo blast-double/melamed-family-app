@@ -1,0 +1,24 @@
+Extract all fields from this Betterment 1099-Supplemental Tax Form. Return ONLY valid JSON, no other text.
+
+{
+  "form_type": "1099-Supplemental",
+  "institution_name": "<name of the institution>",
+  "account_number": "<account number>",
+  "tax_year": <four digit year as integer>,
+  "fields": [
+    {"label": "Foreign sourced income in Box 1a (Ordinary Dividends)", "value": "<dollar amount>", "schedule_line": "Form 1116 — Foreign Tax Credit"},
+    {"label": "Foreign sourced income in Box 1b (Qualified Dividends)", "value": "<dollar amount>", "schedule_line": "Form 1116 — Foreign Tax Credit"},
+    {"label": "U.S. Government interest in Box 1a", "value": "<dollar amount>", "schedule_line": "State return — may be exempt from state tax"},
+    {"label": "In-state municipal income in Box 12 (Tax-Exempt Interest)", "value": "<dollar amount>", "schedule_line": "State return — tax-free in resident state"},
+    {"label": "Out-of-state municipal income in Box 12 (Tax-Exempt Interest)", "value": "<dollar amount>", "schedule_line": "State return — taxable in resident state"},
+    {"label": "Resident state for municipal breakdown", "value": "<two-letter state code>", "schedule_line": null}
+  ]
+}
+
+Rules:
+- Use "0.00" for fields that are blank, empty, or show $0.
+- Format dollar amounts as strings with two decimal places (e.g., "1486.58").
+- Do NOT include dollar signs in the values.
+- If a section is not present on the form, use "0.00" for its fields.
+- Extract the exact numbers shown — do not calculate or infer values.
+- The resident state is typically shown near the municipal interest section.

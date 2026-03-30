@@ -1,0 +1,376 @@
+# Last Updated: 2026-03-29
+#
+# Master tax document checklist. Tax-year agnostic.
+# Single source of truth — referenced by:
+#   - directives/tax/tax-preparation.md (human-readable SOP)
+#   - execution/tax/seed_tax_year.py (DB seeder)
+#   - execution/tax/match_files.py (file matcher)
+#   - execution/tax/asana_tasks.py (Asana task creator, subsystem 2)
+#   - CPA web app (subsystem 4)
+#
+# Parameterized institutions (marked with parentheses) get their actual
+# names from config/tax_config.yaml during year setup.
+
+institutional:
+  - id: employer_w2
+    institution: "(employer)"
+    description: "W-2 source (employer or PEO)"
+    entity_name: null  # Set per-year in tax_config.yaml
+    form_number: "W-2"
+    tax_schedule: "Form 1040 — Wages"
+    typical_arrival: "Late Jan"
+    conditional: true
+    condition: "only if receiving salary that year"
+    download_url: null  # Set per-year in tax_config.yaml
+    filename_patterns:
+      - "*W-2.pdf"
+
+  - id: schwab_brokerage
+    institution: "Schwab (brokerage)"
+    description: "Brokerage account"
+    entity_name: "Schwab"
+    form_number: "1099-Composite"
+    tax_schedule: "Schedule D / Form 8949"
+    typical_arrival: "Mid-Feb"
+    conditional: false
+    filename_patterns:
+      - "*Schwab*1099*Composite*"
+      - "*Schwab*Year-End*"
+      - "*Composite*Year-End*"
+
+  - id: schwab_bank
+    institution: "Schwab (bank)"
+    description: "Bank/checking account"
+    entity_name: "Schwab"
+    form_number: "1099-INT"
+    tax_schedule: "Schedule B"
+    typical_arrival: "Late Jan"
+    conditional: true
+    condition: "only if interest exceeds reporting threshold"
+    filename_patterns:
+      - "*Schwab*Bank*1099*"
+      - "*Schwab*1099*INT*"
+      - "*Schwab*Tax*Form*"
+      - "*Schwab*1099-INT*"
+
+  - id: betterment_1099
+    institution: "Betterment"
+    description: "Robo-advisor (investment)"
+    entity_name: "Betterment"
+    form_number: "1099-B/DIV"
+    tax_schedule: "Schedule D + Schedule B"
+    typical_arrival: "Mid-Feb"
+    conditional: false
+    filename_patterns:
+      - "*Betterment*TaxStatement*1099*"
+      - "*Betterment*1099*"
+      - "*TaxStatement*1099B_DIV*"
+
+  - id: betterment_supplemental
+    institution: "Betterment"
+    description: "Robo-advisor (investment) — supplemental"
+    entity_name: "Betterment"
+    form_number: "1099-Supplemental"
+    tax_schedule: "Schedule D + Schedule B"
+    typical_arrival: "Mid-Feb"
+    conditional: false
+    filename_patterns:
+      - "*Betterment*supplemental*"
+      - "*supplemental_tax_form*"
+
+  - id: betterment_fmv
+    institution: "Betterment"
+    description: "IRA year-end FMV and RMD statement (reported to IRS on Form 5498)"
+    entity_name: "Betterment"
+    form_number: "5498-FMV"
+    tax_schedule: "Form 5498 / IRA"
+    typical_arrival: "Mid-Feb"
+    conditional: false
+    multi_account: true
+    account_pattern: "\\d{15}"
+    filename_patterns:
+      - "*Betterment*FMV*"
+      - "*TaxStatement*FMV*"
+
+  - id: marcus_1099int
+    institution: "Goldman Sachs Marcus"
+    description: "High-yield savings"
+    entity_name: "Goldman Sachs Marcus"
+    form_number: "1099-INT"
+    tax_schedule: "Schedule B"
+    typical_arrival: "Late Jan"
+    conditional: false
+    filename_patterns:
+      - "*Goldman*Sachs*1099*INT*"
+      - "*Marcus*1099*INT*"
+      - "*GS*Marcus*1099*"
+      - "*Tax_1099INT*"
+      - "*Tax*1099*INT*"
+
+  - id: amex_1099int
+    institution: "American Express"
+    description: "High-yield savings"
+    entity_name: "American Express"
+    form_number: "1099-INT"
+    tax_schedule: "Schedule B"
+    typical_arrival: "Late Jan"
+    conditional: false
+    filename_patterns:
+      - "*AMEX*1099*INT*"
+      - "*Amex*1099*INT*"
+      - "*American*Express*1099*"
+      - "*AMEX*Savings*INT*"
+      - "*Amex*Savings*INT*"
+      - "*AMEX*INT*"
+
+  - id: guideline_401k
+    institution: "Guideline"
+    description: "401(k) retirement"
+    entity_name: "Guideline"
+    form_number: "401k-Statement"
+    tax_schedule: "Reference only"
+    typical_arrival: "Jan"
+    conditional: true
+    condition: "only if 401k contributions that year"
+    filename_patterns:
+      - "*Guideline*401*"
+      - "*Guideline*Statement*"
+
+  - id: mortgage_1098
+    institution: "(loan servicer)"
+    description: "Mortgage interest (rental property)"
+    entity_name: null  # Set per-year in tax_config.yaml
+    form_number: "1098"
+    tax_schedule: "Schedule E"
+    typical_arrival: "Late Jan"
+    conditional: false
+    download_url: null  # Set per-year in tax_config.yaml
+    filename_patterns:
+      - "*1098*"
+      - "*Mortgage*Interest*"
+
+  - id: propay_1099k
+    institution: "ProPay"
+    description: "Rental payment processor"
+    entity_name: "ProPay"
+    form_number: "1099-K"
+    tax_schedule: "Schedule E"
+    typical_arrival: "Late Jan"
+    conditional: true
+    condition: "only if ProPay issues 1099-K (may be below threshold)"
+    filename_patterns:
+      - "*PROPAY*1099*"
+      - "*ProPay*1099*"
+
+  - id: coinbase_1099
+    institution: "Coinbase"
+    description: "Crypto exchange"
+    entity_name: "Coinbase"
+    form_number: "1099-MISC"
+    tax_schedule: "Schedule D / Form 8949"
+    typical_arrival: "Late Feb"
+    conditional: true
+    condition: "only if crypto trades that year"
+    filename_patterns:
+      - "*Coinbase*1099*"
+
+  - id: coinbase_gainloss
+    institution: "Coinbase"
+    description: "Crypto exchange — gain/loss detail"
+    entity_name: "Coinbase"
+    form_number: "Gain/Loss Report"
+    tax_schedule: "Schedule D / Form 8949"
+    typical_arrival: "Late Feb"
+    conditional: true
+    condition: "only if crypto trades that year"
+    filename_patterns:
+      - "*Gain*Loss*Coinbase*"
+      - "*Coinbase*Gain*Loss*"
+
+  - id: coinbase_transaction_history
+    institution: "Coinbase"
+    description: "Crypto exchange — per-asset transaction detail"
+    entity_name: "Coinbase"
+    form_number: "Transaction History"
+    tax_schedule: "Schedule D / Form 8949"
+    typical_arrival: "Late Feb"
+    conditional: true
+    condition: "only if crypto trades that year"
+    filename_patterns:
+      - "*SOL*Transaction*"
+      - "*SOL*Transcat*"
+      - "*Coinbase*Transaction*History*"
+
+  - id: employer_1095c
+    institution: "(employer)"
+    description: "Employer-provided health insurance coverage — ACA compliance"
+    entity_name: null
+    form_number: "1095-C"
+    tax_schedule: "ACA compliance"
+    typical_arrival: "Late Jan"
+    conditional: true
+    condition: "only if receiving employer health coverage"
+    download_url: null
+    filename_patterns:
+      - "*1095*"
+      - "*Health*Ins*Coverage*"
+
+self_prepared:
+  - id: rental_income
+    name: "Rental Income"
+    description: "1771 11th Ave rental income"
+    tax_schedule: "Schedule E"
+    format: "CSV"
+    source: "Monarch Money"
+    monarch_category: "Rental Income"
+    filename_patterns:
+      - "*Rental*Income*"
+      - "*1771*Income*"
+
+  - id: rental_expenses
+    name: "Rental Expenses"
+    description: "1771 11th Ave rental expenses"
+    tax_schedule: "Schedule E"
+    format: "CSV"
+    source: "Monarch Money"
+    monarch_category: "1771 -*"
+    filename_patterns:
+      - "*1771*Expense*"
+      - "*Rental*Expense*"
+
+  - id: non_w2_income
+    name: "Non-W-2 Income Summary"
+    description: "Business distributions, misc income not on W-2"
+    tax_schedule: "Schedule E / Schedule C"
+    format: "PDF"
+    source: "Monarch Money"
+    monarch_category: null  # Manual compilation
+    filename_patterns:
+      - "*Non*W*2*Income*"
+      - "*Non*W2*Income*"
+
+  - id: home_office_rent
+    name: "Home Office Rent Allocation"
+    description: "Rent payments for home office deduction"
+    tax_schedule: "Schedule C — Home Office"
+    format: "CSV"
+    source: "Monarch Money"
+    monarch_category: "Rent"
+    filename_patterns:
+      - "*Rent*Home*Office*"
+      - "*Rent*Spend*"
+
+  - id: meals
+    name: "Meals & Entertainment"
+    description: "Business meals and entertainment expenses"
+    tax_schedule: "Schedule C"
+    format: "CSV"
+    source: "Monarch Money"
+    monarch_category: "Meals & Entertainment"
+    filename_patterns:
+      - "*Meals*Entertainment*"
+      - "*Meals*Spend*"
+
+  - id: dues_subscriptions
+    name: "Dues & Subscriptions"
+    description: "Professional dues and business subscriptions"
+    tax_schedule: "Schedule C"
+    format: "CSV"
+    source: "Monarch Money"
+    monarch_category: "Dues & Subscriptions"
+    filename_patterns:
+      - "*Dues*Subscriptions*"
+
+  - id: cc_annual_fees
+    name: "Credit Card Annual Fees"
+    description: "Business credit card annual fees"
+    tax_schedule: "Schedule C"
+    format: "CSV"
+    source: "Monarch Money"
+    monarch_category: "Credit Card Fees"
+    filename_patterns:
+      - "*Credit*Card*Annual*Fee*"
+      - "*Biz*Credit*Card*"
+
+  - id: cell_phone
+    name: "Cell Phone"
+    description: "Cell phone expenses (T-Mobile, Telcel)"
+    tax_schedule: "Schedule C"
+    format: "CSV"
+    source: "Monarch Money"
+    monarch_category: "Cell Phone"
+    filename_patterns:
+      - "*Cell*Phone*"
+
+  - id: office_supplies
+    name: "Office Supplies"
+    description: "Office supply purchases"
+    tax_schedule: "Schedule C"
+    format: "CSV"
+    source: "Monarch Money"
+    monarch_category: "Office Supplies"
+    filename_patterns:
+      - "*Office*Supplies*"
+
+  - id: utilities_home_office
+    name: "Utilities (Home Office)"
+    description: "Utility expenses for home office deduction"
+    tax_schedule: "Schedule C — Home Office"
+    format: "CSV"
+    source: "Monarch Money"
+    monarch_category: "Utilities"
+    filename_patterns:
+      - "*Utilities*Home*Office*"
+      - "*Utilities*Spend*"
+
+  - id: expense_summary
+    name: "Expense Summary"
+    description: "Aggregated deductible expenses across all categories"
+    tax_schedule: "Schedule C / Schedule E"
+    format: "PDF"
+    source: "Monarch Money (compiled)"
+    monarch_category: null
+    filename_patterns:
+      - "*Expenses.pdf"
+      - "*Expense*Summary*"
+
+  - id: estimated_tax_payments
+    name: "Estimated Tax Payments"
+    description: "Federal and CA quarterly estimated payments made"
+    tax_schedule: "Form 1040-ES / 540-ES"
+    format: "Summary"
+    source: "Bank statements / IRS records"
+    monarch_category: null  # May need manual tracking
+    filename_patterns:
+      - "*Estimated*Tax*"
+      - "*1040-ES*"
+      - "*540-ES*"
+
+reference:
+  - id: filed_return
+    name: "Filed Tax Return (Government Copy)"
+    description: "Prior year filed return for CPA reference"
+    filename_patterns:
+      - "*GovernmentCopy*"
+      - "*Government*Copy*"
+
+deadlines:
+  - date: "Jan 31"
+    description: "Most 1099s, W-2s due from institutions"
+    forms: ["W-2", "1099-INT", "1099-K", "1098", "1099-R"]
+
+  - date: "Mid-Feb"
+    description: "Brokerage composites (Schwab, Betterment) — often delayed"
+    forms: ["1099-Composite", "1099-B/DIV"]
+
+  - date: "Late Feb"
+    description: "Crypto forms (Coinbase)"
+    forms: ["1099 (crypto)", "Gain/Loss Report"]
+
+  - date: "Apr 15"
+    description: "Filing deadline (or file extension)"
+    forms: []
+
+  - date: "Oct 15"
+    description: "Extended filing deadline"
+    forms: []

@@ -1,0 +1,36 @@
+Extract all fields from this 1099-B/DIV tax statement. This may be a combined statement from an investment platform (e.g., Betterment). Return ONLY valid JSON, no other text.
+
+{
+  "form_type": "1099-B/DIV",
+  "institution_name": "<name of the institution>",
+  "institution_tin": "<institution TIN/EIN>",
+  "recipient_name": "<recipient name>",
+  "recipient_tin": "<recipient TIN, may be partially masked>",
+  "account_number": "<account number>",
+  "tax_year": <four digit year as integer>,
+  "div_fields": [
+    {"label": "Box 1a - Total ordinary dividends", "value": "<amount>", "schedule_line": "Schedule B, Part II"},
+    {"label": "Box 1b - Qualified dividends", "value": "<amount>", "schedule_line": "Form 1040, Line 3a"},
+    {"label": "Box 2a - Total capital gain distributions", "value": "<amount>", "schedule_line": "Schedule D, Line 13"},
+    {"label": "Box 3 - Nondividend distributions", "value": "<amount>", "schedule_line": null},
+    {"label": "Box 4 - Federal income tax withheld", "value": "<amount>", "schedule_line": "Form 1040, Line 25b"},
+    {"label": "Box 5 - Section 199A dividends", "value": "<amount>", "schedule_line": null},
+    {"label": "Box 6 - Foreign tax paid", "value": "<amount>", "schedule_line": "Form 1116"},
+    {"label": "Box 7 - Foreign country", "value": "<country>", "schedule_line": null}
+  ],
+  "b_summary": {
+    "short_term_proceeds": "<amount>",
+    "short_term_cost_basis": "<amount>",
+    "short_term_gain_loss": "<amount>",
+    "long_term_proceeds": "<amount>",
+    "long_term_cost_basis": "<amount>",
+    "long_term_gain_loss": "<amount>"
+  }
+}
+
+Rules:
+- Use "0.00" for fields that are blank, empty, or show $0.
+- Format dollar amounts as strings with two decimal places.
+- Do NOT include dollar signs in values.
+- For 1099-B: extract the summary totals, not individual lot/transaction details.
+- Losses should be negative values (e.g., "-123.45").

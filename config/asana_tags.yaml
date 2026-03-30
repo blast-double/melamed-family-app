@@ -1,0 +1,36 @@
+# Asana tag taxonomy and section definitions
+# Used by: execution/taskops/asana_client.py, task_classifier.py
+# Last Updated: 2026-03-27
+
+categories:
+  project:
+    tags:
+      Home: dark-blue
+      Travel: dark-green
+      Finance: dark-orange
+      Social: dark-purple
+      Health: dark-teal
+      Baby: dark-pink
+      Mateo: dark-brown
+
+  priority:
+    tags:
+      "Priority: High": light-red
+      "Priority: Medium": light-orange
+      "Priority: Low": light-warm-gray
+
+  source:
+    tags:
+      "Source: Manual": light-blue
+
+  person:
+    default_color: light-teal
+
+sections:
+  - "Backlog"
+  - "Watch"
+  - "To Do"
+  - "Done"
+  - "Waiting on Someone Else"
+
+default_section: "To Do"

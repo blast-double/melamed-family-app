@@ -1,0 +1,50 @@
+# Project Routing Table
+# Maps project keys to Asana project GIDs.
+# Used by: execution/taskops/router.py
+# Last Updated: 2026-03-27
+#
+# GIDs are populated by running: python3 execution/taskops/setup_workspace.py
+
+projects:
+  home:
+    display_name: "Home"
+    description: "Household tasks, maintenance, purchases, contractors"
+    asana_gid: "1213832569286234"
+
+  travel:
+    display_name: "Travel"
+    description: "Trips, bookings, itineraries"
+    asana_gid: "1213832722069968"
+
+  finance:
+    display_name: "Finance"
+    description: "Bills, taxes, insurance, investments"
+    asana_gid: "1213832755113468"
+
+  social:
+    display_name: "Social"
+    description: "Events, gifts, hosting"
+    asana_gid: "1213832804497666"
+
+  health:
+    display_name: "Health"
+    description: "Medical, insurance, appointments, prescriptions"
+    asana_gid: "1213832755043756"
+
+  baby:
+    display_name: "Baby"
+    description: "Baby prep, pediatrician, gear, registry, childcare"
+    asana_gid: "1213832721896008"
+
+  mateo:
+    display_name: "Mateo"
+    description: "Vet visits, grooming, food, walks, training"
+    asana_gid: "1213832804447799"
+
+fallback_project: home
+
+asana:
+  workspace_gid: "1213815286778073"
+  team_gid: "1213815286778075"
+  aaron_gid: "1213815286778061"
+  eugenia_gid: "1213827192025062"

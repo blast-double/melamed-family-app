@@ -1,0 +1,145 @@
+# Last Updated: 2026-03-27
+#
+# Cached portal URLs and click-path instructions for tax document download.
+# Enriched by Tavily search. The seed-tax-project skill refreshes stale entries.
+#
+# Keys match the `id` field in config/tax_documents_master.yaml.
+
+schwab_brokerage:
+  portal_url: "https://client.schwab.com/app/accounts/statements-tax-forms"
+  click_path:
+    - "Log in to schwab.com"
+    - "Select Accounts → Statements & Tax Forms"
+    - "Tax forms appear in the dashboard as they become available"
+    - "Filter by Tax Forms and select the tax year"
+    - "Download 1099 Composite and Year-End Summary (PDF)"
+  expected_format: "PDF"
+  last_verified: "2026-03-27"
+
+schwab_bank:
+  portal_url: "https://client.schwab.com/app/accounts/statements-tax-forms"
+  click_path:
+    - "Log in to schwab.com"
+    - "Select Accounts → Statements & Tax Forms"
+    - "Filter by Tax Forms and select the tax year"
+    - "Download 1099-INT for your bank/checking account (PDF)"
+  expected_format: "PDF"
+  last_verified: "2026-03-27"
+
+betterment_1099:
+  portal_url: "https://www.betterment.com/app/tax-forms"
+  click_path:
+    - "Log in to betterment.com"
+    - "Go to Tax Forms section (available in account settings)"
+    - "Select the tax year"
+    - "Download 1099-B/DIV tax statement (PDF)"
+    - "Note: Forms available by mid-February"
+  expected_format: "PDF"
+  last_verified: "2026-03-27"
+
+betterment_supplemental:
+  portal_url: "https://www.betterment.com/app/tax-forms"
+  click_path:
+    - "Log in to betterment.com"
+    - "Go to Tax Forms section"
+    - "Download supplemental tax form (PDF)"
+    - "This is a separate document from the 1099-B/DIV"
+  expected_format: "PDF"
+  last_verified: "2026-03-27"
+
+betterment_fmv:
+  portal_url: "https://www.betterment.com/app/tax-forms"
+  click_path:
+    - "Log in to betterment.com"
+    - "Go to Tax Forms section"
+    - "Download FMV (Fair Market Value) statement for each account (PDF)"
+    - "Note: May be one FMV per sub-account"
+  expected_format: "PDF"
+  last_verified: "2026-03-27"
+
+marcus_1099int:
+  portal_url: "https://www.marcus.com/us/en/login"
+  click_path:
+    - "Log in to marcus.com"
+    - "Navigate to your savings account"
+    - "Go to Settings or Documents section → Tax Documents"
+    - "Download 1099-INT (PDF)"
+  expected_format: "PDF"
+  last_verified: "2026-03-27"
+
+amex_1099int:
+  portal_url: "https://www.americanexpress.com/en-us/banking/online-savings/account/"
+  click_path:
+    - "Log in to americanexpress.com"
+    - "Go to your High Yield Savings account"
+    - "Select the Documents tab"
+    - "Filter by Tax Documents and select the year"
+    - "Download 1099-INT (PDF)"
+  expected_format: "PDF"
+  last_verified: "2026-03-27"
+
+guideline_401k:
+  portal_url: "https://www.guideline.com/login"
+  click_path:
+    - "Log in to guideline.com"
+    - "Navigate to your 401(k) account dashboard"
+    - "Go to Documents or Statements section"
+    - "Download the year-end account statement (PDF)"
+  expected_format: "PDF"
+  last_verified: "2026-03-27"
+
+mortgage_1098:
+  portal_url: "https://www.newamericanfunding.com/my-account/"
+  click_path:
+    - "Log in to newamericanfunding.com → My Account"
+    - "Go to Account Management → Document Center"
+    - "Find your Year-End Statement (IRS Form 1098)"
+    - "Download 1098 Mortgage Interest Statement (PDF)"
+  expected_format: "PDF"
+  last_verified: "2026-03-27"
+
+propay_1099k:
+  portal_url: "https://www.propay.com/en-US/login"
+  click_path:
+    - "Note: ProPay 1099-K is accessed via RentRedi"
+    - "Log in to RentRedi → view your payment accounts"
+    - "Click Open Dashboard on the payment account"
+    - "Choose the My Profile tab"
+    - "Click Download 1099-K's"
+  expected_format: "PDF"
+  last_verified: "2026-03-27"
+
+coinbase_1099:
+  portal_url: "https://www.coinbase.com/taxes"
+  click_path:
+    - "Log in to coinbase.com"
+    - "Go to Taxes (under profile settings or coinbase.com/taxes)"
+    - "Select the relevant tax year"
+    - "Download 1099 form (PDF)"
+    - "Opt for paperless delivery in Settings tab if not already set"
+  expected_format: "PDF"
+  last_verified: "2026-03-27"
+
+coinbase_gainloss:
+  portal_url: "https://www.coinbase.com/taxes"
+  click_path:
+    - "Log in to coinbase.com"
+    - "Go to Taxes → Statements page"
+    - "Generate a custom statement: select asset, transaction type, date range"
+    - "Choose PDF or CSV format and click Generate"
+    - "Download the gain/loss report"
+  expected_format: "PDF"
+  last_verified: "2026-03-27"
+
+# --- Self-prepared: Monarch Money export instructions ---
+
+monarch_money_export:
+  portal_url: "https://app.monarchmoney.com/transactions"
+  click_path:
+    - "Log in to app.monarchmoney.com"
+    - "Go to Transactions"
+    - "Use filters to set the category and date range (Jan 1 - Dec 31 of the tax year)"
+    - "Click the three-dot menu (upper right) → Export"
+    - "Select CSV format and download"
+  expected_format: "CSV"
+  last_verified: "2026-03-27"
