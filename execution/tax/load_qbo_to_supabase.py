@@ -228,10 +228,7 @@ def build_pnl_document(
         "tax_schedule": "Schedule E",
         "form_number": "QBO P&L",
         "status": "extracted",
-        "file_path": str(
-            WORKSPACE_ROOT / "tax_document_archive" / str(year)
-            / f"keynote_tax_summary_{year}.json"
-        ),
+        "file_path": None,
         "metadata": {
             "source": "quickbooks_online",
             "realm_id": data["metadata"]["realm_id"],
@@ -292,7 +289,7 @@ def build_distributions_document(
             computed_value=computed_total,
         ),
         make_field(
-            "Payment Count", summary["payment_count"],
+            "Payment Count", str(summary["payment_count"]),
             schedule_line=None,
         ),
     ]
@@ -315,10 +312,7 @@ def build_distributions_document(
         "tax_schedule": "Schedule E",
         "form_number": "Distribution Summary",
         "status": "extracted",
-        "file_path": str(
-            WORKSPACE_ROOT / "tax_document_archive" / str(year)
-            / f"keynote_tax_summary_{year}.json"
-        ),
+        "file_path": None,
         "metadata": {
             "source": "quickbooks_online",
             "extracted": {
@@ -361,10 +355,7 @@ def build_interest_document(
         "tax_schedule": "Schedule B",
         "form_number": "QBO Interest",
         "status": "extracted",
-        "file_path": str(
-            WORKSPACE_ROOT / "tax_document_archive" / str(year)
-            / f"keynote_tax_summary_{year}.json"
-        ),
+        "file_path": None,
         "metadata": {
             "source": "quickbooks_online",
             "extracted": {
