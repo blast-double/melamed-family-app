@@ -128,3 +128,40 @@
     @apply font-sans;
   }
 }
+
+/* ── Print Styles ── */
+@media print {
+  @page {
+    size: letter;
+    margin: 0.5in 0.75in;
+  }
+
+  html {
+    font-size: 10px;
+  }
+
+  html, body {
+    background: white !important;
+    color: #1a1a1a !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  /* Avoid page breaks inside cards and table rows */
+  tr {
+    page-break-inside: avoid;
+  }
+
+  /* Schedule section page breaks */
+  .print-page-break {
+    page-break-before: always;
+  }
+}
