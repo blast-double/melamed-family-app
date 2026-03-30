@@ -34,7 +34,6 @@ import type {
   ScheduleGroup,
   MonarchApiResponse,
   MonarchApiSchedule,
-  MonarchApiCategory,
 } from "@/lib/types";
 import { CONFIDENCE_COLORS } from "@/lib/types";
 
@@ -455,108 +454,8 @@ function buildScheduleGroups(
   return groups;
 }
 
-// Income-only schedule keys — rendered in the income section, excluded from document groups
-const INCOME_SCHEDULE_KEYS = new Set(["reference"]);
-
-function isIncomeOnlySchedule(schedule: MonarchApiSchedule): boolean {
-  return schedule.categories.every((c) => c.total >= 0);
-}
-
-function IncomeCategoryRow({ category }: { category: MonarchApiCategory }) {
-  const [expanded, setExpanded] = useState(false);
-  return (
-    <>
-      <TableRow
-        className="border-zinc-700/30 hover:bg-zinc-800/20 cursor-pointer"
-        onClick={() => setExpanded(!expanded)}
-      >
-        <TableCell className="text-xs text-zinc-300">
-          <span className="inline-block w-4 text-zinc-600 mr-1">
-            {expanded ? "\u25BE" : "\u25B8"}
-          </span>
-          {category.name}
-        </TableCell>
-        <TableCell className="text-[10px] text-zinc-500 italic max-w-[300px] truncate">
-          {category.note || ""}
-        </TableCell>
-        <TableCell className="text-xs font-mono text-zinc-500 text-center">
-          {category.count}
-        </TableCell>
-        <TableCell className="text-right">
-          <span className="font-mono text-sm text-emerald-400">{fmt(category.total)}</span>
-        </TableCell>
-        <TableCell className="w-8">
-          <CopyButton text={category.total.toFixed(2)} />
-        </TableCell>
-      </TableRow>
-      {expanded && category.transactions.map((txn) => (
-        <TableRow key={txn.id} className="border-zinc-800/30 hover:bg-zinc-800/20 bg-zinc-950/30">
-          <TableCell className="pl-10 text-[11px] font-mono text-zinc-600">
-            {txn.date} &middot; {txn.merchant}
-          </TableCell>
-          <TableCell className="text-[11px] font-mono text-zinc-500 truncate max-w-[200px]">
-            {txn.account}
-          </TableCell>
-          <TableCell />
-          <TableCell className="text-right">
-            <span className="text-[11px] font-mono text-emerald-400/70">{fmt(txn.amount)}</span>
-          </TableCell>
-          <TableCell className="w-8">
-            <CopyButton text={txn.amount.toFixed(2)} />
-          </TableCell>
-        </TableRow>
-      ))}
-    </>
-  );
-}
-
-function IncomeSection({ schedules }: { schedules: MonarchApiSchedule[] }) {
-  if (schedules.length === 0) return null;
-  const totalIncome = schedules.reduce((sum, s) => sum + s.total, 0);
-
-  return (
-    <section>
-      <div className="flex items-center gap-3 mb-4">
-        <h2 className="text-lg font-light text-zinc-200">Income Sources</h2>
-        <div className="flex-1 h-px bg-zinc-800" />
-        <span className="font-mono text-sm text-emerald-400">{fmt(totalIncome)}</span>
-      </div>
-      {schedules.map((schedule) => (
-        <Card key={schedule.key} className="bg-zinc-900/30 border-zinc-700 overflow-hidden mb-3">
-          <Table>
-            <TableHeader>
-              <TableRow className="border-zinc-700/30 hover:bg-transparent">
-                <TableHead className="text-[10px] font-mono text-zinc-400">Category</TableHead>
-                <TableHead className="text-[10px] font-mono text-zinc-400">Note to CPA</TableHead>
-                <TableHead className="text-[10px] font-mono text-zinc-400 text-center">Count</TableHead>
-                <TableHead className="text-[10px] font-mono text-zinc-400 text-right">Total</TableHead>
-                <TableHead className="w-8" />
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {schedule.categories.map((cat) => (
-                <IncomeCategoryRow key={cat.name} category={cat} />
-              ))}
-              <TableRow className="border-zinc-700/30 hover:bg-transparent font-medium">
-                <TableCell className="text-xs text-zinc-200">TOTAL</TableCell>
-                <TableCell />
-                <TableCell />
-                <TableCell className="text-right">
-                  <span className="font-mono text-sm font-medium text-emerald-400">{fmt(schedule.total)}</span>
-                </TableCell>
-                <TableCell><CopyButton text={schedule.total.toFixed(2)} /></TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </Card>
-      ))}
-    </section>
-  );
-}
-
 export default function VerifyPage() {
   const [schedules, setSchedules] = useState<ScheduleGroup[]>([]);
-  const [incomeSchedules, setIncomeSchedules] = useState<MonarchApiSchedule[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [monarchLoading, setMonarchLoading] = useState(true);
@@ -593,15 +492,7 @@ export default function VerifyPage() {
 
     Promise.all([fetchDocs(), fetchMonarch()])
       .then(() => {
-        // Split income schedules from document groups
-        if (monarchData) {
-          setIncomeSchedules(
-            monarchData.schedules.filter(
-              (s) => INCOME_SCHEDULE_KEYS.has(s.key) || isIncomeOnlySchedule(s)
-            )
-          );
-        }
-        setSchedules(buildScheduleGroups(docs, monarchData, INCOME_SCHEDULE_KEYS));
+        setSchedules(buildScheduleGroups(docs, monarchData));
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
@@ -655,11 +546,7 @@ export default function VerifyPage() {
           </div>
         )}
 
-        {!loading && incomeSchedules.length > 0 && (
-          <IncomeSection schedules={incomeSchedules} />
-        )}
-
-        {!loading && !error && schedules.length === 0 && incomeSchedules.length === 0 && (
+        {!loading && !error && schedules.length === 0 && (
           <div className="flex items-center justify-center py-20">
             <div className="text-center">
               <div className="text-sm text-zinc-400 mb-2">No documents found</div>
