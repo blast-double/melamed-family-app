@@ -74,6 +74,19 @@ python3 -m execution.tax.match_files --year {year} --dry-run
 
 This shows matched, missing, not-expected, and reference docs.
 
+### Step 6: Upload to Supabase Storage
+
+After matching is complete, upload renamed files to Supabase Storage so the tax-portal can display them:
+
+```bash
+python3 -m execution.tax.upload_to_storage --year {year}
+```
+
+Confirm:
+- Number of files uploaded
+- Number of DB records updated with `storage_url`
+- Any files with no DB match (expected for unmapped archive files)
+
 ## Rollback
 
 If renames were wrong:
@@ -108,4 +121,5 @@ This reads `.rename_manifest.json` and reverses all renames.
 - **File matcher**: `execution/tax/match_files.py`
 - **Master checklist**: `config/tax_documents_master.yaml`
 - **Per-year config**: `config/tax_config.yaml`
+- **Storage uploader**: `execution/tax/upload_to_storage.py`
 - **Directive**: `directives/tax/tax-preparation.md`
