@@ -137,8 +137,8 @@ export function DocumentDrawer({ doc }: { doc: ExtractedDocument }) {
 
   return (
     <Sheet>
-      <SheetTrigger className="inline-flex items-center justify-center rounded-md border border-zinc-700 bg-transparent px-2 h-6 text-[10px] font-medium text-zinc-400 hover:bg-zinc-800 hover:text-zinc-300 transition-colors cursor-pointer">
-        View Source
+      <SheetTrigger className="inline-flex items-center justify-center rounded-md border border-sky-800 bg-sky-950/30 px-3 h-7 text-xs font-medium text-sky-400 hover:bg-sky-950/50 hover:text-sky-300 transition-colors cursor-pointer">
+        View Source Document
       </SheetTrigger>
       <SheetContent
         side="right"

@@ -26,7 +26,15 @@ export async function GET(request: NextRequest) {
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     console.error("[/api/monarch] Error:", message);
-    return Response.json({ error: "categorization failed" }, { status: 500 });
+    // Graceful fallback — match MonarchApiResponse contract exactly
+    return Response.json({
+      tax_year: year,
+      total_transactions: 0,
+      confidence: { high: 0, medium: 0, low: 0 },
+      needs_review: 0,
+      schedules: [],
+      _note: "Monarch data unavailable — check Modal endpoint or run locally",
+    });
   }
 }
 

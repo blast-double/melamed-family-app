@@ -24,11 +24,11 @@ export default function Home() {
                 <h2 className="text-sm font-medium text-zinc-200 group-hover:text-white">
                   Transaction Verification
                 </h2>
-                <p className="text-xs text-zinc-500 mt-1">
+                <p className="text-xs text-zinc-400 mt-1">
                   Review deductible transactions by schedule with full breakdowns
                 </p>
               </div>
-              <span className="text-zinc-600 group-hover:text-zinc-400 transition-colors">
+              <span className="text-zinc-500 group-hover:text-zinc-300 transition-colors">
                 →
               </span>
             </div>
@@ -41,20 +41,20 @@ export default function Home() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-sm font-medium text-zinc-200 group-hover:text-white">
-                  Income &amp; Documents
+                  CPA Verification
                 </h2>
-                <p className="text-xs text-zinc-500 mt-1">
-                  Income sources, institutional documents, and extracted tax form data
+                <p className="text-xs text-zinc-400 mt-1">
+                  Review extracted tax form data, verify values, copy to clipboard
                 </p>
               </div>
-              <span className="text-zinc-600 group-hover:text-zinc-400 transition-colors">
+              <span className="text-zinc-500 group-hover:text-zinc-300 transition-colors">
                 →
               </span>
             </div>
           </Link>
         </div>
 
-        <p className="mt-8 text-[10px] font-mono text-zinc-700 text-center">
+        <p className="mt-8 text-[10px] font-mono text-zinc-500 text-center">
           DUAL-PASS EXTRACTION · GOOGLE OCR + CLAUDE VISION · RECONCILED
         </p>
       </div>
