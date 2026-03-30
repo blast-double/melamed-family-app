@@ -155,12 +155,6 @@
     display: block !important;
   }
 
-  /* Remove sticky header positioning */
-  header {
-    position: static !important;
-    backdrop-filter: none !important;
-  }
-
   /* Avoid page breaks inside cards and table rows */
   tr {
     page-break-inside: avoid;

@@ -501,7 +501,7 @@ export default function VerifyPage() {
   return (
     <div className="flex-1 flex flex-col">
       {/* Print header — hidden on screen */}
-      <div className="hidden print-only print:block print:px-0 print:py-4 print:border-b-2 print:border-gray-900 print:mb-6">
+      <div className="hidden print:block print:px-0 print:py-4 print:border-b-2 print:border-gray-900 print:mb-6">
         <h1 className="text-xl font-bold print:text-gray-900">
           Tax Year {TAX_YEAR} — Document Verification Summary
         </h1>
