@@ -130,9 +130,7 @@ export function DocumentDrawer({ doc }: { doc: ExtractedDocument }) {
   const allVerified =
     nonZeroFields.length > 0 && verifiedFields.size >= nonZeroFields.length;
 
-  // Prefer Supabase Storage URL; fall back to local API route for dev
-  const pdfUrl = doc.storage_url
-    || (doc.file_path ? `/api/pdf?path=${encodeURIComponent(doc.file_path)}` : null);
+  const pdfUrl = doc.storage_url || null;
 
   return (
     <Sheet>
