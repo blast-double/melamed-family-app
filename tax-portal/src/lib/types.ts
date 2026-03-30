@@ -61,6 +61,7 @@ export interface ExtractedDocument {
   status: "expected" | "received" | "extracted" | "verified";
   fields: ReconciledField[];
   file_path: string | null;
+  storage_url: string | null;
 }
 
 export type ScheduleGroup = {

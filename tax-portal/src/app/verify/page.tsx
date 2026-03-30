@@ -344,6 +344,7 @@ interface SupabaseDoc {
   tax_schedule: string | null;
   status: string;
   file_path: string | null;
+  storage_url: string | null;
   tax_year: number;
   metadata: Record<string, unknown>;
   source_entity: { name: string } | null;
@@ -394,6 +395,7 @@ function buildScheduleGroups(
         status: doc.status as ExtractedDocument["status"],
         fields,
         file_path: doc.file_path,
+        storage_url: doc.storage_url,
       };
     });
 
@@ -566,7 +568,7 @@ export default function VerifyPage() {
     const fetchDocs = async () => {
       const { data, error: dbError } = await supabase
         .from("documents")
-        .select("id, name, form_number, tax_schedule, status, file_path, tax_year, metadata, source_entity:entities!source_entity_id(name)")
+        .select("id, name, form_number, tax_schedule, status, file_path, storage_url, tax_year, metadata, source_entity:entities!source_entity_id(name)")
         .eq("tax_year", TAX_YEAR)
         .neq("status", "expected")
         .order("tax_schedule")
