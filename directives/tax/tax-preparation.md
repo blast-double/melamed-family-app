@@ -356,13 +356,13 @@ These items are explicitly **outside** this pipeline:
 | **Reimbursed expenses** | In Monarch: "Reimbursed by Keynote" / "Reimbursed by Itero" under Transfers (net-worth neutral). Expense lives on entity's books. Only unreimbursed items are deductible on Aaron's return. |
 | **FEIE / Form 2555** | Aaron's income sources don't qualify for the Foreign Earned Income Exclusion. |
 | **FBAR / Form 8938** | Foreign account balances are under reporting thresholds. |
-| **Itero / Palisades Labs income** | Not passthrough entities. No income paid to Aaron in 2025. |
+| **Itero / Palisades Labs income** | Not passthrough entities. No income paid to Aaron (as of 2025 tax year — revisit annually). |
 
 ---
 
 ## Not Yet Supported
 
-- `/deliver-to-cpa` skill (Phase 10 — planned as PDF cover doc MVP)
+- `/deliver-to-cpa` skill (Step 10 — planned as PDF cover doc MVP)
 - Extraction prompts for 1099-MISC and 5498-FMV
 - Amended/corrected 1099 handling (current workaround: replace file, re-extract)
 - Mid-year institution changes
