@@ -1,5 +1,5 @@
 ---
-name: setup-tax-year
+name: seed-tax-project
 description: "Initialize a new tax year. Confirms active institutions and conditional items, updates config, refreshes portal data via Tavily, seeds Supabase, and creates an Asana project with download tasks."
 user-invocable: true
 ---

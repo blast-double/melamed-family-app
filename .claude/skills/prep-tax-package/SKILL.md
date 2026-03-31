@@ -1,5 +1,5 @@
 ---
-name: tax-status
+name: prep-tax-package
 description: "Check tax document collection status. Conditional-aware gap reporting using the master checklist as source of truth. Shows matched, missing, not-expected, and reference documents separately."
 user-invocable: true
 ---
